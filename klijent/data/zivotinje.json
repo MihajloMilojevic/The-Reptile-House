@@ -1,0 +1,30 @@
+[
+	{
+		"id": 1,
+		"naziv": "Leopard gekon",
+		"opis": "Leopard gekon (Eublepharis macularius) je idealan ljubimac za početnike, koji su se odlučili za ovakvu vrstu ljubimca koji drže u terarijumu.",
+		"cena": 3500,
+		"preporuceno": true,
+		"slike": [
+			{
+				"src": "/zivotinje/leopard_gekon_1.jpg",
+				"alt": "Slika 1"
+			}
+		],
+		"tumbnail": "/zivotinje/leopard_gekon_1.jpg"
+	},
+	{
+		"id": 2,
+		"naziv": "Loptasti piton",
+		"opis": "Često čuvani kao kućni ljubimci i jedna od najpopularnijih vrsta pitona u svetu i kod nas je loptasti piton koji spada u zmije srednje veličine.",
+		"cena": 4000,
+		"preporuceno": true,
+		"slike": [
+			{
+				"src": "/zivotinje/loptasti_piton_1.jpg",
+				"alt": "Slika 1"
+			}
+		],
+		"tumbnail": "/zivotinje/loptasti_piton_1.jpg"
+	}
+]

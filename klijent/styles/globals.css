@@ -1,0 +1,32 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	overflow-x: hidden;
+	min-height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+#__next {
+	width: 100%;
+	min-height: 100vh;
+}
+
+.gradient {
+	background: linear-gradient(238.66deg, #0283E9 -18.13%, #FC01CA 120.27%);
+}
+
+.gradient_text {
+	background: linear-gradient(238.66deg, #0283E9 -18.13%, #FC01CA 120.27%);
+	background-clip: text;
+	color: transparent;
+}

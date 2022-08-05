@@ -1,0 +1,134 @@
+[
+	{
+		"id": 1,
+		"naziv": "Fobasi - 100kom",
+		"opis": "Fobasi, odlicna hrana za Vašeg ljubimca!",
+		"cena": 500,
+		"preporuceno": false,
+		"slike": [
+			{
+				"src": "/hrana/fobasi1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/fobasi2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/fobasi3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/fobasi1.jpg"
+	},
+	{
+		"id": 2,
+		"naziv": "Fobasi - 200kom",
+		"opis": "Fobasi, odlicna hrana za Vašeg ljubimca!",
+		"cena": 850,
+		"preporuceno": false,
+		"slike": [
+			{
+				"src": "/hrana/fobasi1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/fobasi2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/fobasi3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/fobasi1.jpg"
+	},
+	{
+		"id": 3,
+		"naziv": "Fobasi - 300kom",
+		"opis": "Fobasi, odlicna hrana za Vašeg ljubimca!",
+		"cena": 1200,
+		"preporuceno": true,
+		"slike": [
+			{
+				"src": "/hrana/fobasi1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/fobasi2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/fobasi3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/fobasi1.jpg"
+	},
+	{
+		"id": 4,
+		"naziv": "Dubije - 100kom",
+		"opis": "Dubije, odlcan izvor proteina za Vašeg ljubimca.",
+		"cena": 600,
+		"preporuceno": false,
+		"slike": [
+			{
+				"src": "/hrana/dubije1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/dubije2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/dubije3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/dubije1.jpg"
+	},
+	{
+		"id": 5,
+		"naziv": "Dubije - 200kom",
+		"opis": "Dubije, odlcan izvor proteina za Vašeg ljubimca.",
+		"cena": 1200,
+		"preporuceno": false,
+		"slike": [
+			{
+				"src": "/hrana/dubije1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/dubije2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/dubije3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/dubije1.jpg"
+	},
+	{
+		"id": 6,
+		"naziv": "Dubije - 300kom",
+		"opis": "Dubije, odlcan izvor proteina za Vašeg ljubimca.",
+		"cena": 1600,
+		"preporuceno": true,
+		"slike": [
+			{
+				"src": "/hrana/dubije1.jpg",
+				"alt": "Slika 1"
+			},
+			{
+				"src": "/hrana/dubije2.jpg",
+				"alt": "Slika 2"
+			},
+			{
+				"src": "/hrana/dubije3.jpg",
+				"alt": "Slika 3"
+			}
+		],
+		"tumbnail": "/hrana/dubije1.jpg"
+	}
+]
