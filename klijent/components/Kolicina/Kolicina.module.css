@@ -1,3 +1,18 @@
+.kolicina_container {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 1rem;
+}
+
+@media screen and (max-width: 500px) {
+	.kolicina_container {
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+	}
+}
+
 .kolicina {
 	text-align: center;
 	display: flex;
@@ -9,7 +24,6 @@
 }
 
 .kolicina_smanji {
-	margin-left: 1rem;
 	text-align: center;
 	padding: 1rem 1rem;
 	border: 1px solid black;

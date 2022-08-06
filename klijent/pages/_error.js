@@ -14,7 +14,7 @@ export default function Custom404() {
 				alignItems: "center",
 				flexDirection: "column",
 			}}>
-				<PageTitle>Stranica koju tražite ne postoji</PageTitle>
+				<PageTitle>Došlo je do greške</PageTitle>
 				<GradientButton>
 					<Link href="/">Vrati se na početnu</Link>
 				</GradientButton>

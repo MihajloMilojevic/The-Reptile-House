@@ -16,7 +16,8 @@ export async function getStaticProps() {
 	const data = require("../../data/zivotinje.json");
 	return {
 		props: {
-			data
+			data,
+			revalidate: 60
 		}
 	}
 }

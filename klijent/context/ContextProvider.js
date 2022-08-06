@@ -1,6 +1,7 @@
 import {createContext, useContext, useState, useEffect} from "react";
 import useWindowSize from "../utils/hooks/useWindowSize";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { Loader } from "../components";
 
 const StateContext = createContext();
 
@@ -10,6 +11,7 @@ export default function ContextProvider({children}) {
 	const [activeMenu, setActiveMenu] = useState(false);
 	const [korpa, setKorpa] = useState([]);
 	const [ukupnaCenaKorpe, setUkupnaCenaKorpe] = useState(0);
+	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
 		setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * item.cena), 0))
@@ -23,7 +25,7 @@ export default function ContextProvider({children}) {
 
 	function promeniKorpu(newKorpa) {
 		setKorpa(newKorpa);
-		localStorage.setItem("korpa", JSON.stringify(korpa))
+		localStorage.setItem("korpa", JSON.stringify(newKorpa))
 	}
 
 	function dodajUKorpu(newItem) {
@@ -107,12 +109,14 @@ export default function ContextProvider({children}) {
 				dodajUKorpu,
 				izbaciIzKorpe,
 				promeniKolicinu,
-				notificationTypes, createNotification
+				isprazniKorpu,
+				notificationTypes, createNotification,
+				loader, setLoader
 			}}
 		>
 			{children}
-			
 			<NotificationContainer/>
+			<Loader show={loader} />
 		</StateContext.Provider>	
 	)
 }

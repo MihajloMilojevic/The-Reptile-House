@@ -15,7 +15,8 @@ export async function getStaticProps() {
 	const data = require("../../data/oprema.json");
 	return {
 		props: {
-			data
+			data,
+			revalidate: 60
 		}
 	}
 }

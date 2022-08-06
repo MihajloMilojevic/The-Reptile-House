@@ -16,7 +16,8 @@ export async function getStaticProps() {
 	const data = require("../../data/hrana.json");
 	return {
 		props: {
-			data
+			data,
+			revalidate: 60
 		}
 	}
 }

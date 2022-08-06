@@ -17,11 +17,13 @@ function Kolicina({value, onChange, min, max}) {
 	}
 
 	return (
-		<div className={styles.kolicina}>
-			<span>Količina: </span>
-			<div className={styles.kolicina_smanji} onClick={smanji}>-</div>
-			<div className={styles.kolicina_broj}>{kolicina}</div>
-			<div className={styles.kolicina_povecaj} onClick={povecaj}>+</div>
+		<div className={styles.kolicina_container}>
+			<span style={{fontSize: 16}}>Količina: </span>
+			<div className={styles.kolicina}>
+				<div className={styles.kolicina_smanji} onClick={smanji}>-</div>
+				<div className={styles.kolicina_broj}>{kolicina}</div>
+				<div className={styles.kolicina_povecaj} onClick={povecaj}>+</div>
+			</div>
 		</div>
 	)
 }

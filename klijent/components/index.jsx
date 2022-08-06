@@ -10,3 +10,4 @@ export {default as PageTitle} from "./PageTitle/PageTitle";
 export {default as Kolicina} from "./Kolicina/Kolicina";
 export {default as ScrollToTop} from "./ScrollToTop/ScrollToTop";
 export {default as SingleProductPageContent} from "./SingleProductPageContent/SingleProductPageContent";
+export {default as Loader} from "./Loader/Loader";

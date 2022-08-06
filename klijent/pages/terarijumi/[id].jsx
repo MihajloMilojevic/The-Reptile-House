@@ -131,7 +131,7 @@ function Boje({current, values, onChange}) {
 							alignItems: "center"
 						}}
 					>
-						{ (console.log(index, index === current, current) || (index === current)) && 
+						{ (index === current) && 
 							<BsCheckLg size={25} style={{ fill: "url(#blue-gradient)"}} />
 						}
 					</div>
@@ -146,7 +146,6 @@ function Terarijum(params) {
 	const [kolicina, setKolicna] = useState(1)
 	const [bojaIndex, setBojaIndex] = useState(0)
 	const {windowSize, dodajUKorpu} = useStateContext()
-
 	return (
 		<Page>
 		<div style={{
@@ -159,6 +158,7 @@ function Terarijum(params) {
 			<div style={{flex: 1}}>
 				<Slider slides={params.slike}/>
 			</div>
+			
 			<div 
 				style={{
 					flex: 1.5, 

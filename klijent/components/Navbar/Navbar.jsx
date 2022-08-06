@@ -3,7 +3,9 @@ import styles from "./Navbar.module.css";
 import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai"
 import {BiBasket} from "react-icons/bi"
 import { useStateContext } from "../../context/ContextProvider";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+
 
 const links = [
 	{
@@ -30,12 +32,19 @@ const links = [
 
 function Navbar() {
 
+	const router = useRouter();
 	const {activeMenu, setActiveMenu, windowSize, korpa} = useStateContext();
+	const [currentRoute, setCurrentRoute] = useState(router.route);
 
 	useEffect(() => {
 		if(windowSize.width > 900)
 			setActiveMenu(false);
 	}, [windowSize])
+
+	useEffect(() => {
+		setCurrentRoute(router.route);
+		setActiveMenu(false)
+	},[router.route])
 
 	return (
 		<nav className={styles.navbar} id="navbar">
