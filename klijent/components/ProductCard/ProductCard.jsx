@@ -8,10 +8,16 @@ function ProductCard(props) {
 	const {dodajUKorpu} = useStateContext();
 
 	function dodaj() {
-		const obj = {...props, kolicina: 1};
-		if(props.boje)
-			obj.boja = props.boje[0];
-		dodajUKorpu(obj)
+		const item = {
+			naziv: props.naziv,
+			id: props.id,
+			cena: props.cena,
+			thumbnail: props.thumbnail,
+			kolicina: 1,
+			...(props.boje ? {boja: props.boje[0]} : {}),
+			doplate: []
+		}
+		dodajUKorpu(item)
 	}
 
 	return (
@@ -19,7 +25,7 @@ function ProductCard(props) {
 		<div className={styles.product_card}>
 			<div className={styles.product_card_image} style={{cursor: "pointer"}}>
 				<Link href={props.url}>
-					<img src={props.tumbnail} alt={props.naziv}/>
+					<img src={props.thumbnail} alt={props.naziv}/>
 				</Link>
 			</div>
 			<div className={styles.product_card_content}>

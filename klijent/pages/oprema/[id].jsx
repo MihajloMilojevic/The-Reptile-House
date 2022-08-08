@@ -1,9 +1,17 @@
 import {Page, SingleProductPageContent} from "../../components";
+import Head from 'next/head'
 
 function Oprema(params) {
 
 	return (
 		<Page>
+			<Head>
+				<title>{params.naziv} | The Reptile House</title>
+				<meta 
+					name="description" 
+					content={params.opis}
+				/>
+			</Head>
 			<SingleProductPageContent {...params} />
 		</Page>
 	)

@@ -7,7 +7,6 @@ export default function Document() {
 				<meta charSet="utf-8" />
 				<meta name="keywords" content="Reptile House, Reptili, Kupovina, Zmije, Gušteri" />
 				<meta name="author" content="Mihajlo Milojević"/>
-					
 			</Head>
 			<body>
 				<Main />

@@ -15,7 +15,7 @@
 				"alt": "Slika 2"
 			}
 		],
-		"tumbnail": "/oprema/uvbLampe1.jpg"
+		"thumbnail": "/oprema/uvbLampe1.jpg"
 	},
 	{
 		"id": 2,
@@ -33,7 +33,7 @@
 				"alt": "Slika 2"
 			}
 		],
-		"tumbnail": "/oprema/uvbLampe1.jpg"
+		"thumbnail": "/oprema/uvbLampe1.jpg"
 	},
 	{
 		"id": 3,
@@ -55,7 +55,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/oprema/spotSIjaliceCrne1.jpg"
+		"thumbnail": "/oprema/spotSIjaliceCrne1.jpg"
 	},
 	{
 		"id": 4,
@@ -77,7 +77,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/oprema/spotSIjaliceCrne1.jpg"
+		"thumbnail": "/oprema/spotSIjaliceCrne1.jpg"
 	},
 	{
 		"id": 5,
@@ -95,7 +95,7 @@
 				"alt": "Slika 2"
 			}
 		],
-		"tumbnail": "/oprema/spotSIjaliceKlasik1.jpg"
+		"thumbnail": "/oprema/spotSIjaliceKlasik1.jpg"
 	},
 	{
 		"id": 6,
@@ -113,7 +113,7 @@
 				"alt": "Slika 2"
 			}
 		],
-		"tumbnail": "/oprema/spotSIjaliceKlasik1.jpg"
+		"thumbnail": "/oprema/spotSIjaliceKlasik1.jpg"
 	},
 	{
 		"id": 7,
@@ -135,6 +135,6 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/oprema/uvbSenzori1.jpg"
+		"thumbnail": "/oprema/uvbSenzori1.jpg"
 	}
 ]

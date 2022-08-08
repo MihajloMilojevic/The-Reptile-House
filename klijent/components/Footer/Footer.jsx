@@ -5,12 +5,12 @@ import {Line} from "..";
 
 const links = [
 	{
-		icon: <BiEnvelope style={{ fill: "url(#footer-gradient)"}}/>,
-		text: <a href="mailto:thereptilehouse.info@gmail.com" target="_blank">thereptilehouse.info@gmail.com</a>
-	},
-	{
 		icon: <BiPhone style={{ fill: "url(#footer-gradient)"}}/>,
 		text: <a href="tel:+381695466205"  target="_blank">+381695466205</a>
+	},
+	{
+		icon: <BiEnvelope style={{ fill: "url(#footer-gradient)"}}/>,
+		text: <a href="mailto:thereptilehouse.info@gmail.com" target="_blank">thereptilehouse.info@gmail.com</a>
 	},
 	{
 		icon: <BsInstagram style={{ fill: "url(#footer-gradient)"}}/>,

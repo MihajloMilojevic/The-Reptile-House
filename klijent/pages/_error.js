@@ -1,5 +1,6 @@
 import { GradientButton, Page, PageTitle } from "../components"
 import Link from "next/link"
+import Head from 'next/head'
 
 export default function Custom404() {
 	return (
@@ -8,6 +9,13 @@ export default function Custom404() {
 			justifyContent: "center",
 			alignItems: "center",
 		}}>
+			<Head>
+				<title>Greška | The Reptile House</title>
+				<meta 
+					name="description" 
+					content="Došlo je do greške. Pokušajte ponovo kasnije" 
+				/>
+			</Head>
 			<div style={{
 				display: "flex",
 				justifyContent: "center",

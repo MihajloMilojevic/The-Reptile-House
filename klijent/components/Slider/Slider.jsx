@@ -45,8 +45,8 @@ function Slider({slides}) {
 					})
 				}
 
-				<a className={styles.slider_prev} onClick={prev}>❮</a>
-				<a className={styles.slider_next} onClick={next}>❯</a>
+				<div className={styles.slider_prev} onClick={prev}>❮</div>
+				<div className={styles.slider_next} onClick={next}>❯</div>
 
 			</div>
 

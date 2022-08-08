@@ -1,14 +1,14 @@
 
 .slider {
 	width: 100%;
-	height: 100%;
 	display: flex;
 	flex-direction: column;
 	z-index: 1 !important;
+	justify-content: center;
+	align-items: center;
 }
 
 .slider_container {
-	flex: 1;
 	position: relative;
 	margin: auto;
 	display: flex;

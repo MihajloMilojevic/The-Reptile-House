@@ -1,6 +1,7 @@
 export {default as Navbar} from "./Navbar/Navbar";
 export {default as Footer} from "./Footer/Footer";
 export {default as Line} from "./Line/Line";
+export {default as Kvadrat} from "./Kvadrat/Kvadrat";
 export {default as Slider} from "./Slider/Slider";
 export {default as ProductCard} from "./ProductCard/ProductCard";
 export {default as ProductList} from "./ProductList/ProductList";

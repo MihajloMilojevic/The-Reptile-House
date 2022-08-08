@@ -1,23 +1,48 @@
 import {useStateContext} from "../context/ContextProvider";
-import {Page, PageTitle, Kolicina, GradientButton} from "../components";
+import {Page, PageTitle, GradientButton} from "../components";
 import { useState } from "react";
+import {AiOutlineClose} from "react-icons/ai";
+import Head from 'next/head'
 
 function KorpaItem(props) {
 	
-	const {windowSize, izbaciIzKorpe, promeniKolicinu} = useStateContext()
+	const {windowSize, izbaciIzKorpe} = useStateContext()
 	return (
 		<div 
 			style={{
 				display: "flex",
-				flexDirection: windowSize.width < 600 ? "column" : "row",
-				padding: windowSize.width <= 500 ? "2rem" : "4rem",
+				flexDirection: windowSize.width <= 600 ? "column" : "row",
+				paddingLeft: windowSize.width <= 500 ? "2rem" : "4rem",
+				paddingRight: windowSize.width <= 500 ? "2rem" : "4rem",
+				paddingBottom: windowSize.width <= 500 ? "2rem" : "4rem",
+				paddingTop: "4rem",
 				boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.25)",
 				borderRadius: "10px",
 				gap: "2rem",
-				width: windowSize.width <= 900 ? (windowSize.width <= 1200 ? "100%" : "50%") : "75%",
+				width: windowSize.width <= 900 ? "100%" : (windowSize.width <= 1400 ? "75%" : "50%"),
 				background: "white",
+				position: "relative"
 			}}
 		>
+			<GradientButton 
+				style={{
+					borderRadius: "50%",
+					width: 40,
+					height: 40,
+					padding: 0,
+					display: "flex",
+					justifyContent: "center",
+					alignItems: "center",
+					position: "absolute",
+					top: "1.5rem",
+					right: "1.5rem"
+				}} 
+				onClick={
+					() => izbaciIzKorpe(props.index)
+				}
+			>
+				<AiOutlineClose color="white" size={25} />
+			</GradientButton>
 			<div 
 				style={{
 					flex: 1,
@@ -32,11 +57,14 @@ function KorpaItem(props) {
 						maxHeight: 300,
 						minWidth: 150,
 						minHeight: 150,
-						overflow: "hidden"
+						overflow: "hidden",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
 					}}
 				>
 					<img 
-						src={props.tumbnail} 
+						src={props.thumbnail} 
 						alt={props.naziv}
 						style={{
 							objectFit: "contain",
@@ -59,10 +87,13 @@ function KorpaItem(props) {
 					<h3>{props.naziv}</h3>
 					{props?.boja && <div style={{width: 25, height: 25, border: "1px solid black", borderRadius: "50%", background: props.boja.hex}}/>}
 				</div>
-				<Kolicina value={props.kolicina} onChange={val => promeniKolicinu(props.index, val)}/>
+				<p>Količina: {props.kolicina}</p>
 				<p>Cena po komadu: {props.cena}din.</p>
-				<p>Ukupna cena: {props.kolicina * props.cena} din.</p>
-				<GradientButton style={{fontSize: 16}} onClick={() => izbaciIzKorpe(props.index)}>Izbaci</GradientButton>
+				{
+					props.doplate.map((item, index) => (<p key={index}>{item.za}: {item.vrednost}din.</p>))
+				}
+				{props.natpis && <p>Natpis: "{props.natpis}"</p>}
+				<p>Ukupna cena: {props.kolicina * (props.cena + props.doplate.reduce((prev, curr) => (prev + curr.vrednost), 0))} din.</p>
 			</div>
 		</div>
 	)
@@ -181,6 +212,10 @@ function Korpa() {
 			formDataCopy.telefon.error = "Telefon može sadržati samo brojeve"
 			hasError = true;
 		}
+		else if(formDataCopy.telefon.value.length <6 ) {
+			formDataCopy.telefon.error = "Nedovoljno cifara";
+			hasError = true;
+		}
 		else {
 			formDataCopy.telefon.error = ""
 		}
@@ -197,10 +232,8 @@ function Korpa() {
 			formDataCopy.mejl.error = ""
 		}
 
-		
-
 		if(!formDataCopy.adresa.value) {
-			formDataCopy.adresa.error = "Morate uneti adresa."
+			formDataCopy.adresa.error = "Morate uneti adresu."
 			hasError = true;
 		}
 		else {
@@ -213,15 +246,18 @@ function Korpa() {
 		}
 
 		setLoader(true);
-		isprazniKorpu();
-		setFormData(initialFormData);
-		setShowForm(false);
-		createNotification({
-			type: notificationTypes.SUCCESS,
-			title: "Uspešna porudžbina",
-			message: "Vaša porudžbina je uspešno zabeležena. Neko će Vam se uskoro javiti oko detalja isporuke. Hvala"
-		})
-		setTimeout(() => setLoader(false), 3000)
+		setTimeout(() => {
+			setLoader(false);
+			isprazniKorpu();
+			setFormData(initialFormData);
+			setShowForm(false);
+			createNotification({
+				type: notificationTypes.SUCCESS,
+				title: "Uspešna porudžbina",
+				message: "Vaša porudžbina je uspešno zabeležena. Neko će Vam se uskoro javiti oko detalja isporuke. Hvala",
+				timeout: 10 * 1000
+			})
+		}, 2000)
 	}
 	
 	return (
@@ -232,6 +268,13 @@ function Korpa() {
 			alignItems: "center",
 			gap: "2rem",
 		}}>
+			<Head>
+				<title>Kopra | The Reptile House</title>
+				<meta 
+					name="description" 
+					content="Pogledajte stvari koje ste dodali u korpu, popunite formular i poručite sve što vam treba za Vašeg ljubimca." 
+				/>
+			</Head>
 			<PageTitle style={{flex: 1}}>Korpa</PageTitle>
 			<div 
 				style={{
@@ -258,7 +301,7 @@ function Korpa() {
 			}}>
 				<div>
 					<p style={{fontSize: 16, fontWeight: "bolder", margin: "0.5rem", textAlign: "center"}}>Ukupna cena: </p>
-					<PageTitle style={{margin: 0}}>{ukupnaCenaKorpe} din.</PageTitle>
+					<h3 style={{margin: 0, textAlign: "center", fontSize: 24}}>{ukupnaCenaKorpe} din.</h3>
 					{
 						(korpa.length > 0 && !showForm) && 
 						(<GradientButton style={{width: "100%"}} onClick={() => setShowForm(true)}>Naruči</GradientButton>)

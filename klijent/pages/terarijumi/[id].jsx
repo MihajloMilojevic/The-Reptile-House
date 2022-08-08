@@ -1,21 +1,10 @@
-import {Page, Slider, Kolicina, GradientButton, PageTitle} from "../../components";
+import {Page, Slider, Kolicina, GradientButton, PageTitle, Kvadrat} from "../../components";
 import { useStateContext } from "../../context/ContextProvider";
 import {useState} from "react";
 import {BsCheckLg} from "react-icons/bs";
-
-function Kvadrat({style}) {
-	return (
-		<div 
-			style={{
-				width: "10px",
-				height: "10px",
-				transform: "rotate(45deg)",
-				background: "linear-gradient(238.66deg, #0283E9 -18.13%, #FC01CA 120.27%)",
-				...style
-			}}
-		/>
-	)
-}
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Head from 'next/head'
 
 function Dimenzije({duzina, sirina, visina}) {
 
@@ -112,7 +101,8 @@ function Boje({current, values, onChange}) {
 				justifyContent: "space-around",
 				alignItems: "center",
 				gap: "1rem",
-				margin: "1rem"
+				marginBottom: "1rem",
+				width: "100%"
 			}}
 		>
 			{
@@ -123,8 +113,8 @@ function Boje({current, values, onChange}) {
 						style={{
 							background: boja.hex, 
 							borderRadius: "50%",
-							width: "50px",
-							height: "50px",
+							width: 40,
+							height: 40,
 							border: "1px solid black",
 							display: "flex",
 							justifyContent: "center",
@@ -132,7 +122,7 @@ function Boje({current, values, onChange}) {
 						}}
 					>
 						{ (index === current) && 
-							<BsCheckLg size={25} style={{ fill: "url(#blue-gradient)"}} />
+							<BsCheckLg size={20} style={{ fill: "url(#blue-gradient)"}} />
 						}
 					</div>
 				))
@@ -142,10 +132,124 @@ function Boje({current, values, onChange}) {
 	)	
 }
 
+function Cutomization({bojaValue, bojaChange, natpisValue, natpisChange, doplateCene}) {
+
+	const {windowSize} = useStateContext();
+
+	return (
+		<div>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "flex-start",
+					alignItems: ((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? "flex-start" : "center",
+					gap: ((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? "1rem" : "2rem",
+					margin: "1rem",
+					flexDirection: ((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? "column" : "row"
+				}}
+			>
+				<FormControlLabel
+					control={
+						<Switch
+							checked={bojaValue.checked}
+							onChange={e => bojaChange({...bojaValue, checked: e.target.checked})}
+							color="secondary"
+						/>
+					}
+					label={`Prilagodjena boja - ${doplateCene.boja}din.`}
+					labelPlacement="end"
+				/>
+				{bojaValue.checked && 
+					<div style={
+						((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? 
+						{
+							width: "100%",
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							margin: 0
+						} : 
+						{}
+					}>
+						<input 
+							type={"color"} 
+							value={bojaValue.hex} 
+							onChange={e => bojaChange({...bojaValue, hex: e.target.value})}
+						/>
+					</div>
+				}
+			</div>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "flex-start",
+					alignItems: ((windowSize.width <= 1300 && windowSize.width >= 900) || windowSize.width <= 700) ? "flex-start" : "center",
+					gap: ((windowSize.width <= 1300 && windowSize.width >= 900) || windowSize.width <= 700) ? "1rem" : "2rem",
+					margin: "1rem",
+					flexDirection: ((windowSize.width <= 1300 && windowSize.width >= 900) || windowSize.width <= 700) ? "column" : "row"
+				}}
+			>
+				<FormControlLabel
+					control={
+						<Switch
+							checked={natpisValue.checked}
+							onChange={e => natpisChange({...natpisValue, checked: e.target.checked})}
+							color="secondary"
+						/>
+					}
+					label={`Prilagodjen natpis - ${doplateCene.natpis}din.`}
+					labelPlacement="end"
+					style={{minWidth: "fit-content"}}
+				/>
+				{natpisValue.checked && 
+					<input 
+						type={"text"} 
+						value={natpisValue.natpis} 
+						onChange={e => natpisChange({...natpisValue, natpis: e.target.value})}
+						style={{
+							width: "100%",
+							outline: "none",
+							border: "1px solid black",
+							borderRadius: 15,
+							padding: "1rem 1rem"
+						}}
+					/>
+				}
+			</div>
+		</div>
+	)
+}
+
 function Terarijum(params) {
 	const [kolicina, setKolicna] = useState(1)
 	const [bojaIndex, setBojaIndex] = useState(0)
+	const [customNatpis, setCustomNatpis] = useState({
+		natpis: "The reptile house",
+		checked: false
+	})
+	const [customBoja, setCustomBoja] = useState({
+		hex: "#000000",
+		checked: false
+	})
 	const {windowSize, dodajUKorpu} = useStateContext()
+
+	function dodajClick() {
+		const item = {
+			naziv: params.naziv,
+			id: params.id,
+			cena: params.cena,
+			thumbnail: params.thumbnail,
+			kolicina,
+			boja: customBoja.checked ? customBoja : params.boje[bojaIndex],
+			...(customNatpis.checked ? {natpis: customNatpis.natpis} : {}),
+			doplate: [
+				...(customBoja.checked ? [{za: "Prilagodjena boja", vrednost: params.doplate.boja}] : []),
+				...(customNatpis.checked ? [{za: "Prilagodjen natpis", vrednost: params.doplate.natpis}] : []),
+			]
+		}
+		dodajUKorpu(item)
+	}
+
 	return (
 		<Page>
 		<div style={{
@@ -155,6 +259,13 @@ function Terarijum(params) {
 			height: "min-content",
 			padding: windowSize.width <= 900 ? windowSize.width <= 500 ? "1rem" : "2rem" : ".25rem"
 		}}>
+			<Head>
+				<title>{params.naziv} | The Reptile House</title>
+				<meta 
+					name="description" 
+					content={params.opis} 
+				/>
+			</Head>
 			<div style={{flex: 1}}>
 				<Slider slides={params.slike}/>
 			</div>
@@ -185,26 +296,36 @@ function Terarijum(params) {
 					/> 
 
 					<Dodaci dodaci={params.dodaci} />
-
-					<Boje 
-						current={bojaIndex}
-						onChange={setBojaIndex}
-						values={params.boje}
-					/>
 					
-				</div>
-				<div 
-					style={{
-						display: "flex", 
-						alignItems: (windowSize.width <= 500 || (windowSize.width > 900 && windowSize.width <= 1050)) ? "flex-start" : "center", 
-						justifyContent: "space-between",
-						gap: "1rem",
-						width: "100%",
-						flexDirection: (windowSize.width <= 500 || (windowSize.width > 900 && windowSize.width <= 1050)) ? "column" : "row"
-					}}
-				>
-					<Kolicina value={kolicina} onChange={setKolicna}/>
-					<GradientButton onClick={() => dodajUKorpu({...params, kolicina, boja: params.boje[bojaIndex]})}>Dodaj u korpu</GradientButton>
+				
+					<Boje 
+							current={customBoja.checked ? -1 : bojaIndex}
+							onChange={(index) => {setBojaIndex(index); setCustomBoja({...customBoja, checked: false})}}
+							values={params.boje}
+					/>
+
+					<Cutomization 
+						bojaValue={customBoja}
+						bojaChange={setCustomBoja}
+						natpisValue={customNatpis}
+						natpisChange={setCustomNatpis}
+						doplateCene={params.doplate}
+					/>
+
+					<div 
+						style={{
+							display: "flex", 
+							alignItems: (windowSize.width <= 500 || (windowSize.width > 900 && windowSize.width <= 1050)) ? "flex-start" : "center", 
+							justifyContent: "space-between",
+							gap: "1rem",
+							width: "100%",
+							flexDirection: (windowSize.width <= 500 || (windowSize.width > 900 && windowSize.width <= 1050)) ? "column" : "row"
+						}}
+					>
+						<Kolicina value={kolicina} onChange={setKolicna}/>
+						<GradientButton onClick={dodajClick}>Dodaj u korpu</GradientButton>
+					</div>
+				
 				</div>
 			</div>
 		</div>
@@ -226,13 +347,21 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context) {
 	const data = require("../../data/terarijumi.json");
-	const ter = data.find(item => item.id === Number(context.params.id))
-	if(!ter)
+	const doplate = require("../../data/doplate.json");
+	// const doplate = {
+	// 	"boja": 1500,
+	// 	"natpis": 2000
+	// }
+	const terarijum = data.find(item => item.id === Number(context.params.id))
+	if(!terarijum)
 		return {
 			notFound: true
 		}
 	return {
-		props: ter,
+		props: {
+			...terarijum,
+			doplate
+		},
 		revalidate: 60
 	}
 }

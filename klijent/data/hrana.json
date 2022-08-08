@@ -1,27 +1,5 @@
 [
 	{
-		"id": 1,
-		"naziv": "Fobasi - 100kom",
-		"opis": "Fobasi, odlicna hrana za Vašeg ljubimca!",
-		"cena": 500,
-		"preporuceno": false,
-		"slike": [
-			{
-				"src": "/hrana/fobasi1.jpg",
-				"alt": "Slika 1"
-			},
-			{
-				"src": "/hrana/fobasi2.jpg",
-				"alt": "Slika 2"
-			},
-			{
-				"src": "/hrana/fobasi3.jpg",
-				"alt": "Slika 3"
-			}
-		],
-		"tumbnail": "/hrana/fobasi1.jpg"
-	},
-	{
 		"id": 2,
 		"naziv": "Fobasi - 200kom",
 		"opis": "Fobasi, odlicna hrana za Vašeg ljubimca!",
@@ -41,7 +19,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/hrana/fobasi1.jpg"
+		"thumbnail": "/hrana/fobasi1.jpg"
 	},
 	{
 		"id": 3,
@@ -63,7 +41,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/hrana/fobasi1.jpg"
+		"thumbnail": "/hrana/fobasi1.jpg"
 	},
 	{
 		"id": 4,
@@ -85,7 +63,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/hrana/dubije1.jpg"
+		"thumbnail": "/hrana/dubije1.jpg"
 	},
 	{
 		"id": 5,
@@ -107,7 +85,7 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/hrana/dubije1.jpg"
+		"thumbnail": "/hrana/dubije1.jpg"
 	},
 	{
 		"id": 6,
@@ -129,6 +107,6 @@
 				"alt": "Slika 3"
 			}
 		],
-		"tumbnail": "/hrana/dubije1.jpg"
+		"thumbnail": "/hrana/dubije1.jpg"
 	}
 ]

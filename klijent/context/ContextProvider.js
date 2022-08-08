@@ -14,7 +14,8 @@ export default function ContextProvider({children}) {
 	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
-		setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * item.cena), 0))
+		console.log(korpa);
+		setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * (item.cena + item.doplate.reduce((prev, curr) => (prev + curr.vrednost), 0))), 0))
 	}, [korpa])
 
 	useEffect(() => {
@@ -31,9 +32,9 @@ export default function ContextProvider({children}) {
 	function dodajUKorpu(newItem) {
 		const newKorpa = [...korpa];
 		const index = newKorpa.findIndex(item => item.naziv === newItem.naziv);
-		if(index < 0)
+		if(index < 0 || newKorpa[index]?.boja?.hex != newItem?.boja?.hex || newKorpa[index]?.natpis !== newItem?.natpis)
 			newKorpa.push(newItem);
-		else
+		else 
 			newKorpa[index].kolicina += newItem.kolicina;
 		promeniKorpu(newKorpa)
 		createNotification({
