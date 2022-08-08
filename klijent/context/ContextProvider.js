@@ -14,19 +14,34 @@ export default function ContextProvider({children}) {
 	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
-		console.log(korpa);
-		setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * (item.cena + item.doplate.reduce((prev, curr) => (prev + curr.vrednost), 0))), 0))
-	}, [korpa])
+		try {
+			setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * (item.cena + item.doplate?.reduce((prev, curr) => (prev + curr.vrednost), 0))), 0))
+		}
+		catch {
+			isprazniKorpu()
+			console.log("?")
+		}
+	}, [korpa])			
 
 	useEffect(() => {
+		const required = ["id", "naziv", "cena", "kolicina", "doplate", "thumbnail"]
 		const localKorpa = localStorage.getItem("korpa");
-		if(localKorpa)
-			setKorpa(JSON.parse(localKorpa));
+		if(!localKorpa) return;
+		const jsonKorpa = JSON.parse(localKorpa);
+		for (const item of jsonKorpa) {
+			for (const req of required) {
+				if(!item.hasOwnProperty(req)) {
+					localStorage.removeItem("korpa");
+					setKorpa([]);
+					return;
+				}
+			}
+		}
 	}, [])
 
 	function promeniKorpu(newKorpa) {
-		setKorpa(newKorpa);
 		localStorage.setItem("korpa", JSON.stringify(newKorpa))
+		setKorpa(newKorpa);
 	}
 
 	function dodajUKorpu(newItem) {
