@@ -4,6 +4,7 @@ import {useState} from "react";
 import {BsCheckLg} from "react-icons/bs";
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Tooltip from '@mui/material/Tooltip';
 import Head from 'next/head'
 
 function Dimenzije({duzina, sirina, visina}) {
@@ -148,17 +149,22 @@ function Cutomization({bojaValue, bojaChange, natpisValue, natpisChange, doplate
 					flexDirection: ((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? "column" : "row"
 				}}
 			>
-				<FormControlLabel
-					control={
-						<Switch
-							checked={bojaValue.checked}
-							onChange={e => bojaChange({...bojaValue, checked: e.target.checked})}
-							color="secondary"
-						/>
-					}
-					label={`Prilagodjena boja - ${doplateCene.boja}din.`}
-					labelPlacement="end"
-				/>
+				<Tooltip
+					enterTouchDelay={0} arrow 
+					title="Ukoliko se odlučite za prilagođenu boju, nakon poručivanja neko će Vam se javiti oko mogućnosti prilagođavanja."
+				>
+					<FormControlLabel
+						control={
+							<Switch
+								checked={bojaValue.checked}
+								onChange={e => bojaChange({...bojaValue, checked: e.target.checked})}
+								color="secondary"
+							/>
+						}
+						label={`Prilagodjena boja - ${doplateCene.boja}din.`}
+						labelPlacement="end"
+					/>
+				</Tooltip>
 				{bojaValue.checked && 
 					<div style={
 						((windowSize.width <= 1000 && windowSize.width >= 900) || windowSize.width <= 400) ? 
@@ -189,18 +195,23 @@ function Cutomization({bojaValue, bojaChange, natpisValue, natpisChange, doplate
 					flexDirection: ((windowSize.width <= 1300 && windowSize.width >= 900) || windowSize.width <= 700) ? "column" : "row"
 				}}
 			>
-				<FormControlLabel
-					control={
-						<Switch
-							checked={natpisValue.checked}
-							onChange={e => natpisChange({...natpisValue, checked: e.target.checked})}
-							color="secondary"
-						/>
-					}
-					label={`Prilagodjen natpis - ${doplateCene.natpis}din.`}
-					labelPlacement="end"
-					style={{minWidth: "fit-content"}}
-				/>
+				<Tooltip
+					enterTouchDelay={0} arrow 
+					title="Ukoliko se odlučite za prilagođen natpis, nakon poručivanja neko će Vam se javiti oko mogućnosti prilagođavanja."
+				>
+					<FormControlLabel
+						control={
+							<Switch
+								checked={natpisValue.checked}
+								onChange={e => natpisChange({...natpisValue, checked: e.target.checked})}
+								color="secondary"
+							/>
+						}
+						label={`Prilagodjen natpis - ${doplateCene.natpis}din.`}
+						labelPlacement="end"
+						style={{minWidth: "fit-content"}}
+					/>
+				</Tooltip>
 				{natpisValue.checked && 
 					<input 
 						type={"text"} 
