@@ -1,6 +1,6 @@
 import React from 'react'
 
-function GradientButton({children, onClick, style, ...rest}) {
+function GradientButton({children, onClick, style, className, ...rest}) {
 	return (
 		<button 
 			onClick={onClick} 
@@ -14,7 +14,7 @@ function GradientButton({children, onClick, style, ...rest}) {
 				cursor: "pointer",
 				...style
 			}}
-			className="gradient"
+			className={`gradient ${className}`}
 			{...rest}
 		>
 			{children}

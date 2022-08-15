@@ -239,7 +239,7 @@ function Terarijum(params) {
 		checked: false
 	})
 	const [customBoja, setCustomBoja] = useState({
-		hex: "#000000",
+		hex: "#ff0000",
 		checked: false
 	})
 	const {windowSize, dodajUKorpu} = useStateContext()
@@ -260,7 +260,6 @@ function Terarijum(params) {
 		}
 		dodajUKorpu(item)
 	}
-
 	return (
 		<Page>
 		<div style={{

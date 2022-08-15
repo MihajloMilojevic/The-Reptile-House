@@ -12,6 +12,7 @@ export default function ContextProvider({children}) {
 	const [korpa, setKorpa] = useState([]);
 	const [ukupnaCenaKorpe, setUkupnaCenaKorpe] = useState(0);
 	const [loader, setLoader] = useState(false);
+	const [navHeight, setNavHeight] = useState(0);
 
 	useEffect(() => {
 		try {
@@ -127,7 +128,8 @@ export default function ContextProvider({children}) {
 				promeniKolicinu,
 				isprazniKorpu,
 				notificationTypes, createNotification,
-				loader, setLoader
+				loader, setLoader,
+				navHeight, setNavHeight
 			}}
 		>
 			{children}

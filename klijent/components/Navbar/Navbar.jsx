@@ -3,7 +3,7 @@ import styles from "./Navbar.module.css";
 import {AiOutlineMenu, AiOutlineClose} from "react-icons/ai"
 import {BiBasket} from "react-icons/bi"
 import { useStateContext } from "../../context/ContextProvider";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
 
@@ -32,22 +32,25 @@ const links = [
 
 function Navbar() {
 
+	const {setNavHeight} = useStateContext();
+
+	const navRef = useRef(null);
+
 	const router = useRouter();
 	const {activeMenu, setActiveMenu, windowSize, korpa} = useStateContext();
-	const [currentRoute, setCurrentRoute] = useState(router.route);
 
 	useEffect(() => {
+		setNavHeight(navRef.current.clientHeight);
 		if(windowSize.width > 900)
 			setActiveMenu(false);
 	}, [windowSize])
 
 	useEffect(() => {
-		setCurrentRoute(router.route);
 		setActiveMenu(false)
 	},[router.route])
 
 	return (
-		<nav className={styles.navbar} id="navbar">
+		<nav className={styles.navbar} id="navbar" ref={navRef}>
 			<Link href="/">
 				<div className={styles.navbar__logo} onClick={() => setActiveMenu(false)}>
 					<img src="/logo-no-bg.png" alt="Logo" width={50} height={50}/>

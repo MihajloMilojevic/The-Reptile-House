@@ -4,7 +4,7 @@
 		"naziv": "UVB lampe 10%",
 		"opis": "U ponudi E27 fluorescentne, spiralne uvb lampe za reptile. UVB zraci 10%",
 		"cena": 2200,
-		"preporuceno": false,
+		"preporuceno": true,
 		"slike": [
 			{
 				"src": "/oprema/uvbLampe1.jpg",
@@ -62,7 +62,7 @@
 		"naziv": "Spot sijalica crna (50W)",
 		"opis": "U ponudi E27 crne kao i klasicne spot sijalice (3% uvb)",
 		"cena": 850,
-		"preporuceno": false,
+		"preporuceno": true,
 		"slike": [
 			{
 				"src": "/oprema/spotSIjaliceCrne1.jpg",
@@ -102,7 +102,7 @@
 		"naziv": "Spot sijalica klasik (50W)",
 		"opis": "U ponudi E27 crne kao i klasicne spot sijalice (3% uvb)",
 		"cena": 700,
-		"preporuceno": false,
+		"preporuceno": true,
 		"slike": [
 			{
 				"src": "/oprema/spotSIjaliceKlasik1.jpg",
@@ -120,7 +120,7 @@
 		"naziv": "UVB senzori",
 		"opis": "U ponudi Uvb senzori kojima mozete proveriti efektivnost Vase lampe.",
 		"cena": 950,
-		"preporuceno": false,
+		"preporuceno": true,
 		"slike": [
 			{
 				"src": "/oprema/uvbSenzori1.jpg",

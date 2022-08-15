@@ -22,7 +22,7 @@ function ProductCard(props) {
 
 	return (
 		
-		<div className={styles.product_card}>
+		<div className={styles.product_card} style={props.style ?? {}}>
 			<div className={styles.product_card_image} style={{cursor: "pointer"}}>
 				<Link href={props.url}>
 					<img src={props.thumbnail} alt={props.naziv}/>
