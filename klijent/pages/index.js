@@ -75,7 +75,7 @@ function PitanjeForma() {
 		setFormData({...formData, [e.target.name]: {...formData[e.target.name], value: e.target.value}});
 	}
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		
 		let hasError = false;
@@ -117,11 +117,33 @@ function PitanjeForma() {
 			return;
 		}
 
-		setFormData(initialFormData)
-		createNotification({
-			type: notificationTypes.SUCCESS,
-			message: "Poruka uspešno poslata. Možete očekivati odgovor u narednih par dana."
-		})
+		try {
+			const res = await fetch("/api/mail", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					ime: formData.ime.value,
+					mejl: formData.mejl.value,
+					poruka: formData.poruka.value
+				})
+			})
+			const data = await res.json();
+			if(!data.ok)
+				throw new Error(data.message);
+			setFormData(initialFormData)
+			createNotification({
+				type: notificationTypes.SUCCESS,
+				message: "Poruka uspešno poslata. Možete očekivati odgovor u narednih par dana."
+			})
+		} catch (error) {
+			console.error(error);
+			createNotification({
+				type: notificationTypes.error,
+				message: "Došlo je do greške. Pokušajte ponovo kasnije."
+			})
+		}
 	}
 
 	return (

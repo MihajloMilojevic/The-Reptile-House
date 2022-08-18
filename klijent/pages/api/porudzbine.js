@@ -14,7 +14,7 @@ const handler = nc({
 
 handler.post(async (req, res) => {
 	const data = await poruci(req.body);
-	res.status(StatusCodes.CREATED).json({ok: true, data});
+	res.status(StatusCodes.OK).json({ok: true, data});
 })
 
 export default handler;
