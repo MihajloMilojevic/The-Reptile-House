@@ -1,5 +1,6 @@
 import {ProductList, Page, PageTitle} from "../../components"
 import Head from 'next/head'
+import { sveZivotinje } from "../../database/zivotinje";
 
 function Zivotinje({data}) {
 	return (
@@ -20,11 +21,11 @@ function Zivotinje({data}) {
 export default Zivotinje
 
 export async function getStaticProps() {
-	const data = require("../../data/zivotinje.json");
+	const data = await sveZivotinje();
 	return {
 		props: {
 			data,
-			revalidate: 60
-		}
+		},
+		revalidate: 60
 	}
 }

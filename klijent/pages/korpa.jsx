@@ -1,6 +1,6 @@
 import {useStateContext} from "../context/ContextProvider";
 import {Page, PageTitle, GradientButton} from "../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {AiOutlineClose} from "react-icons/ai";
 import Head from 'next/head'
 
@@ -171,6 +171,11 @@ function Korpa() {
 	const [showForm, setShowForm] = useState(false)
 	const [formData, setFormData] = useState(initialFormData)
 
+	useEffect(() => {
+		if(korpa.length === 0)
+			setShowForm(false);
+	}, [korpa])
+
 	function formDataChange(e) {
 		setFormData({...formData, [e.target.name]: {...formData[e.target.name], value: e.target.value}})
 	}
@@ -245,19 +250,50 @@ function Korpa() {
 			return;
 		}
 
-		setLoader(true);
-		setTimeout(() => {
-			setLoader(false);
+		try {
+			setLoader(true);
+			const data = await fetch("/api/porudzbine", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					proizvodi: korpa.map(item => ({
+						proizvod_id: item.id,
+						kolicina: item.kolicina,
+						boja: item?.boja?.hex ?? "",
+						natpis: item?.natpis ?? ""
+					})),
+					ime: formData.ime.value,
+					prezime: formData.prezime.value,
+					mejl: formData.mejl.value,
+					adresa: formData.adresa.value,
+					telefon: formData.telefon.value
+				})
+			})
+			const json = await data.json();
+			if(!json.ok)
+				throw json.error;
 			isprazniKorpu();
 			setFormData(initialFormData);
-			setShowForm(false);
 			createNotification({
 				type: notificationTypes.SUCCESS,
 				title: "Uspešna porudžbina",
 				message: "Vaša porudžbina je uspešno zabeležena. Neko će Vam se uskoro javiti oko detalja isporuke. Hvala",
 				timeout: 10 * 1000
 			})
-		}, 2000)
+		} catch (error) {
+			console.error(error);
+			createNotification({
+				type: notificationTypes.ERROR,
+				title: "Greška",
+				message: "Došlo je do greške. Probajte ponovo kasnije."
+			})
+		}
+		finally {
+			setShowForm(false);
+			setLoader(false);
+		}
 	}
 	
 	return (

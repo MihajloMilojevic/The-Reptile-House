@@ -1,5 +1,6 @@
 import {ProductList, Page, PageTitle} from "../../components"
 import Head from 'next/head'
+import { sviTerarijumi } from "../../database/terarijumi";
 
 
 function Terarijumi({data}) {
@@ -21,11 +22,11 @@ function Terarijumi({data}) {
 export default Terarijumi
 
 export async function getStaticProps() {
-	const data = require("../../data/terarijumi.json");
+	const data = await sviTerarijumi();
 	return {
 		props: {
 			data,
-			revalidate: 60
-		}
+		},
+		revalidate: 60
 	}
 }

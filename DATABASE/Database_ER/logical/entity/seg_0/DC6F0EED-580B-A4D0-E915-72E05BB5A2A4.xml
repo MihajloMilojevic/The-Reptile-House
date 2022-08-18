@@ -1,0 +1,58 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DC6F0EED-580B-A4D0-E915-72E05BB5A2A4" name="DODATAK">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 15:51:31 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="22A8758E-F201-8775-4C34-131ED4159505">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 15:51:37 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="naziv" id="3E09ABC7-DA96-F371-5DE6-1D38F36099E4">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 15:52:00 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="23564DDF-732F-207C-7892-69A36AC1B7FD" name="DODATAK PK">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 15:51:56 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>22A8758E-F201-8775-4C34-131ED4159505</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

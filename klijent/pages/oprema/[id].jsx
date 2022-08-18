@@ -1,5 +1,6 @@
 import {Page, SingleProductPageContent} from "../../components";
 import Head from 'next/head'
+import {jednaOprema, svaOprema} from "../../database/oprema";
 
 function Oprema(params) {
 
@@ -21,8 +22,8 @@ export default Oprema;
 
 
 export async function getStaticPaths() {
-	const data = require("../../data/oprema.json");
-	const paths = data.map(item => `/oprema/${item.id}`)
+	const data = await svaOprema();
+	const paths = data.map(item => ({params: {id: item.id}}));
 	return {
 		paths,
 		fallback: "blocking"
@@ -30,15 +31,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-	console.log(context);
-	const data = require("../../data/oprema.json");
-	const ter = data.find(item => item.id === Number(context.params.id))
-	if(!ter)
+	const opr = await jednaOprema(context.params.id)
+	if(!opr)
 		return {
 			notFound: true
 		}
 	return {
-		props: ter,
+		props: opr,
 		revalidate: 60
 	}
 }

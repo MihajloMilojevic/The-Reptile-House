@@ -8,6 +8,7 @@ import {FiSend} from "react-icons/fi";
 import { Navigation} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Link from 'next/link';
+import preporuceno from '../database/preporuceno';
 
 
 export default function Home(props) {
@@ -35,16 +36,12 @@ export default function Home(props) {
 	)
 }
 
-export async function getStaticProps(context) {
-	const preporuceno = [
-		...(require("../data/terarijumi.json").filter(item => item.preporuceno).map(item =>( {...item, category: "terarijumi"}))),
-		...(require("../data/zivotinje.json").filter(item => item.preporuceno).map(item =>( {...item, category: "zivotinje"}))),
-		...(require("../data/oprema.json").filter(item => item.preporuceno).map(item =>( {...item, category: "oprema"}))),
-		...(require("../data/hrana.json").filter(item => item.preporuceno).map(item =>( {...item, category: "hrana"})))
-	]
+export async function getStaticProps() {
+	
+	const prep = await preporuceno();
 	return {
 		props: {
-			preporuceno
+			preporuceno: prep
 		},
 		revalidate: 60
 	}
@@ -252,7 +249,7 @@ function Preporuceno({data, widthPercent}) {
 						data.map((item, index) => <SwiperSlide key={index} style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
 							<ProductCard 
 								{...item} 
-								url={`/${item.category}/${item.id}`} 
+								url={`/${item.kategorija}/${item.id}`} 
 								style={{
 									margin: "1rem",
 									width: 350

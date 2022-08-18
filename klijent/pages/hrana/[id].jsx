@@ -1,5 +1,6 @@
 import {Page, SingleProductPageContent} from "../../components";
 import Head from "next/head";
+import {jednaHrana, svaHrana} from "../../database/hrana";
 
 function Hrana(params) {
 
@@ -21,8 +22,8 @@ export default Hrana;
 
 
 export async function getStaticPaths() {
-	const data = require("../../data/hrana.json");
-	const paths = data.map(item => `/hrana/${item.id}`)
+	const data = await svaHrana();
+	const paths = data.map(item => ({params: {id: item.id}}));
 	return {
 		paths,
 		fallback: "blocking"
@@ -30,14 +31,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-	const data = require("../../data/hrana.json");
-	const ter = data.find(item => item.id === Number(context.params.id))
-	if(!ter)
+	const hr = await jednaHrana(context.params.id);
+	if(!hr)
 		return {
 			notFound: true
 		}
 	return {
-		props: ter,
+		props: hr,
 		revalidate: 60
 	}
 }

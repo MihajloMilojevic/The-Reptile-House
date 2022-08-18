@@ -6,6 +6,8 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Tooltip from '@mui/material/Tooltip';
 import Head from 'next/head'
+import doplate from "../../database/doplate";
+import { jedanTerarijum, sviTerarijumi } from "../../database/terarijumi";
 
 function Dimenzije({duzina, sirina, visina}) {
 
@@ -347,8 +349,8 @@ export default Terarijum;
 
 
 export async function getStaticPaths() {
-	const data = require("../../data/terarijumi.json");
-	const paths = data.map(item => `/terarijumi/${item.id}`)
+	const data = await sviTerarijumi();
+	const paths = data.map(item => ({params: {id: item.id}}));
 	return {
 		paths,
 		fallback: "blocking"
@@ -356,13 +358,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-	const data = require("../../data/terarijumi.json");
-	const doplate = require("../../data/doplate.json");
-	// const doplate = {
-	// 	"boja": 1500,
-	// 	"natpis": 2000
-	// }
-	const terarijum = data.find(item => item.id === Number(context.params.id))
+	const doplateJSON = await doplate();
+	const terarijum = await jedanTerarijum(context.params.id)
 	if(!terarijum)
 		return {
 			notFound: true
@@ -370,7 +367,7 @@ export async function getStaticProps(context) {
 	return {
 		props: {
 			...terarijum,
-			doplate
+			doplate: doplateJSON
 		},
 		revalidate: 60
 	}

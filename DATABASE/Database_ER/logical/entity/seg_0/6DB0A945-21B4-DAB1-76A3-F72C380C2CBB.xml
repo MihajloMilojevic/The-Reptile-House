@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6DB0A945-21B4-DAB1-76A3-F72C380C2CBB" name="PROIZVOD_BOJA">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:12:08 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="proizvod_id" id="FFE9EF50-F441-2145-17E4-E6779B63AE45">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:12:08 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="boja_id" id="F8B7D0B1-F7BA-17A9-2B8F-DD970C577B57">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:12:08 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id" id="37246160-160E-EB61-C928-5C0A3865C738">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:16:04 UTC</createdTime>
+<generatorID>9C2FC96D-93CA-F747-6995-B78D486EFDD7</generatorID>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<referedAttribute>4A5B1613-6CB5-BC60-9ACD-2E7B74087418</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="9160A1E4-63F7-BF67-20A7-68DF53B80BDF">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:16:12 UTC</createdTime>
+<generatorID>5FEA5D87-E3B5-0200-7AA5-8D575E7EF0EE</generatorID>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<referedAttribute>6A760327-0616-C49C-7DBE-C99E6BA9D9E8</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="proizvod_id1" id="6744FF7C-9AEC-967C-A0C0-F64E1DCA4050">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:16:12 UTC</createdTime>
+<generatorID>5FEA5D87-E3B5-0200-7AA5-8D575E7EF0EE</generatorID>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<referedAttribute>61B000E2-CA99-DD66-6233-4CC26F33AB94</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="slika_id" id="09AAEF77-09DF-AB7A-4B03-3C8B0CB1255E">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:16:12 UTC</createdTime>
+<generatorID>5FEA5D87-E3B5-0200-7AA5-8D575E7EF0EE</generatorID>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<referedAttribute>14FB34B0-C692-28CD-152C-BA4879C7AD74</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="8DF8DA84-A113-C3D3-0DE5-5338278EDEA3" name="PROIZVOD_SLIKA PK">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-16 21:12:08 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FFE9EF50-F441-2145-17E4-E6779B63AE45</attributeRef>
+<attributeRef>F8B7D0B1-F7BA-17A9-2B8F-DD970C577B57</attributeRef>
+<attributeRef>37246160-160E-EB61-C928-5C0A3865C738</attributeRef>
+<attributeRef>9160A1E4-63F7-BF67-20A7-68DF53B80BDF</attributeRef>
+<attributeRef>6744FF7C-9AEC-967C-A0C0-F64E1DCA4050</attributeRef>
+<attributeRef>09AAEF77-09DF-AB7A-4B03-3C8B0CB1255E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

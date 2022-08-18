@@ -1,5 +1,6 @@
 import {ProductList, Page, PageTitle} from "../../components"
 import Head from 'next/head'
+import {svaOprema} from "../../database/oprema";
 
 function Oprema({data}) {
 	return (
@@ -20,11 +21,11 @@ function Oprema({data}) {
 export default Oprema
 
 export async function getStaticProps() {
-	const data = require("../../data/oprema.json");
+	const data = await svaOprema()
 	return {
 		props: {
 			data,
-			revalidate: 60
-		}
+		},
+		revalidate: 60
 	}
 }

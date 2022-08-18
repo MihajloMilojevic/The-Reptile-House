@@ -1,5 +1,6 @@
 import {ProductList, Page, PageTitle} from "../../components"
 import Head from 'next/head'
+import {svaHrana} from "../../database/hrana";
 
 function Hrana({data}) {
 	return (
@@ -21,11 +22,11 @@ function Hrana({data}) {
 export default Hrana
 
 export async function getStaticProps() {
-	const data = require("../../data/hrana.json");
+	const data = await svaHrana();
 	return {
 		props: {
 			data,
-			revalidate: 60
-		}
+		},
+		revalidate: 60
 	}
 }

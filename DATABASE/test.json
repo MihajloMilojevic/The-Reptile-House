@@ -1,0 +1,23 @@
+{
+  "id": "yful6xljeav",
+  "naziv": "THR - T1 800x400x400",
+  "cena": 5000,
+  "opis": "Terarijumi THR- T1, predvidjeni su za cuvanje vecih gustera (bradate agame) i zmija srednje velicine (loptasti pitoni, smukovi...).",
+  "preporuceno": 1,
+  "thumbnail": "/terarijumi/TH1-1.jpeg",
+  "slike": [
+    { "src": "/terarijumi/TH1-1.jpeg", "alt": "THR - T1 800x400x400" },
+    { "src": "/terarijumi/TH1-2.jpeg", "alt": "THR - T1 800x400x400" },
+    { "src": "/terarijumi/TH1-3.jpeg", "alt": "THR - T1 800x400x400" },
+    { "src": "/terarijumi/TH1-4.jpeg", "alt": "THR - T1 800x400x400" }
+  ],
+  "dodaci": [
+    "Uvb fluorescentna lampa 10%",
+    "Spot sijalica 25W",
+    "Wi-Fi (tuch) prekidac",
+    "HD kamera za pracenje zivotinja",
+    "Uvb senzor"
+  ],
+  "boje": [{ "hex": "#000000" }, { "hex": "#9c9a9a" }, { "hex": "#ffffff" }],
+  "dimenzije": { "duzina": 800, "sirina": 400, "visina": 400 }
+}

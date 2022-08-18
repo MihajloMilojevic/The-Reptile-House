@@ -2,6 +2,7 @@ import {Page, PageTitle, Slider, Kolicina, GradientButton, Kvadrat} from "../../
 import { useStateContext } from "../../context/ContextProvider";
 import {useState} from "react"
 import Head from 'next/head'
+import { jednaZivotinja, sveZivotinje } from "../../database/zivotinje";
 
 function Item({text, value}) {
 	return (
@@ -152,8 +153,8 @@ export default Zivotinja;
 
 
 export async function getStaticPaths() {
-	const data = require("../../data/zivotinje.json");
-	const paths = data.map(item => `/zivotinje/${item.id}`)
+	const data = await sveZivotinje();
+	const paths = data.map(item => ({params: {id: item.id}}));
 	return {
 		paths,
 		fallback: "blocking"
@@ -161,14 +162,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-	const data = require("../../data/zivotinje.json");
-	const ter = data.find(item => item.id === Number(context.params.id))
-	if(!ter)
+	const ziv = await jednaZivotinja(context.params.id)
+	if(!ziv)
 		return {
 			notFound: true
 		}
 	return {
-		props: ter,
+		props: ziv,
 		revalidate: 60
 	}
 }

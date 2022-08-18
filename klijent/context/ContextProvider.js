@@ -15,16 +15,6 @@ export default function ContextProvider({children}) {
 	const [navHeight, setNavHeight] = useState(0);
 
 	useEffect(() => {
-		try {
-			setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * (item.cena + item.doplate?.reduce((prev, curr) => (prev + curr.vrednost), 0))), 0))
-		}
-		catch {
-			isprazniKorpu()
-			console.log("?")
-		}
-	}, [korpa])			
-
-	useEffect(() => {
 		const required = ["id", "naziv", "cena", "kolicina", "doplate", "thumbnail"]
 		const localKorpa = localStorage.getItem("korpa");
 		if(!localKorpa) return;
@@ -38,7 +28,17 @@ export default function ContextProvider({children}) {
 				}
 			}
 		}
+		setKorpa(jsonKorpa);
 	}, [])
+
+	useEffect(() => {
+		try {
+			setUkupnaCenaKorpe(korpa.reduce((sum, item) => (sum + item.kolicina * (item.cena + item.doplate?.reduce((prev, curr) => (prev + curr.vrednost), 0))), 0))
+		}
+		catch {
+			isprazniKorpu()
+		}
+	}, [korpa])			
 
 	function promeniKorpu(newKorpa) {
 		localStorage.setItem("korpa", JSON.stringify(newKorpa))
