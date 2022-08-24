@@ -11,6 +11,7 @@ async function poruci({ime, prezime, mejl, adresa, telefon, proizvodi}) {
 				`VALUES('${id}', '${ime}', '${prezime}', '${mejl}', '${adresa}', '${telefon}'); ` +
 				proizvodi.map(item => dodajProizvodSQL({...item, porudzbina_id: id})).join(" "); 
 	let data = await mysql.query(sql);
+	await mysql.end();
 	return data;
 }
 

@@ -32,12 +32,10 @@ const links = [
 
 function Navbar() {
 
-	const {setNavHeight} = useStateContext();
-
 	const navRef = useRef(null);
 
 	const router = useRouter();
-	const {activeMenu, setActiveMenu, windowSize, korpa} = useStateContext();
+	const {activeMenu, setActiveMenu, windowSize, korpa, setNavHeight} = useStateContext();
 
 	useEffect(() => {
 		setNavHeight(navRef.current.clientHeight);

@@ -16,6 +16,11 @@ CREATE TABLE kategorije (
 	naziv TEXT NOT NULL
 );
 
+CREATE TABLE statusi (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	naziv TEXT NOT NULL
+);
+
 CREATE TABLE boje (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	hex VARCHAR(20) NOT NULL
@@ -39,7 +44,9 @@ CREATE TABLE porudzbine (
 	mejl TEXT NOT NULL,
 	telefon TEXT NOT NULL,
 	adresa TEXT NOT NULL,
-	datum DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+	datum DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	status_id INT NOT NULL DEFAULT 1 REFERENCES statusi(id) ,
+	posiljka_id TEXT
 );
 
 CREATE TABLE proizvodi (
@@ -114,7 +121,7 @@ END//
 
 CREATE FUNCTION json_slike(proizvod_id_in VARCHAR(20), alt TEXT) RETURNS JSON
 BEGIN
-	RETURN JSON_EXTRACT(( SELECT CONCAT( '[', GROUP_CONCAT( JSON_OBJECT('src', s.src, 'alt', alt) SEPARATOR ', ' ), ']' ) FROM slike s JOIN proizvodi_slike ps ON ps.slika_id = s.id WHERE ps.proizvod_id = proizvod_id_in ), '$' );
+	RETURN JSON_EXTRACT(( SELECT CONCAT( '[', GROUP_CONCAT( JSON_OBJECT('id', s.id, 'src', s.src, 'alt', alt) SEPARATOR ', ' ), ']' ) FROM slike s JOIN proizvodi_slike ps ON ps.slika_id = s.id WHERE ps.proizvod_id = proizvod_id_in ), '$' );
 END//
 
 CREATE FUNCTION json_boje(proizvod_id_in VARCHAR(20)) RETURNS JSON
@@ -142,9 +149,23 @@ BEGIN
 	RETURN (SELECT JSON_OBJECT('kategorija', (SELECT naziv FROM kategorije WHERE id = p.kategorija_id), 'id', p.id, 'naziv', p.naziv, 'cena', p.cena, 'opis', p.opis, 'preporuceno', p.preporuceno, 'thumbnail', ( SELECT src FROM slike WHERE id = p.thumbnail ), 'slike', (JSON_EXTRACT(json_slike(p.id, p.naziv), '$')), 'dodaci', (JSON_EXTRACT(json_dodaci(p.id), '$')), 'boje', (JSON_EXTRACT(json_boje(p.id), '$')), 'dimenzije', JSON_OBJECT('duzina', p.duzina, 'sirina', p.sirina, 'visina', p.visina)) AS JSON FROM proizvodi p WHERE p.id = proizvod_id_in);
 END//
 
+CREATE FUNCTION json_porudzbina(porudzbina_id_in VARCHAR(20)) RETURNS JSON
+BEGIN
+	RETURN (SELECT JSON_OBJECT('id', p.id, 'ime', p.ime, 'prezime', p.prezime, 'mejl', p.mejl, 'telefon', p.telefon, 'adresa', p.adresa, 'datum', p.datum, 'posiljka_id', p.posiljka_id, 'status', (SELECT naziv FROM statusi s WHERE s.id = p.status_id), 'cena', (SELECT SUM(pp.kolicina * pp.cena) FROM proizvodi_porudzbine pp WHERE pp.porudzbina_id = p.id), 'proizvodi', JSON_EXTRACT((SELECT CONCAT('[', GROUP_CONCAT( CASE k.naziv WHEN 'terarijumi' THEN JSON_SET((json_terarijum(pr.id)), '$.cena', pp.cena, '$.kolicina', pp.kolicina, '$.boja', pp.boja, '$.natpis', pp.natpis) WHEN 'zivotinje' THEN JSON_SET((json_zivotinja(pr.id)), '$.cena', pp.cena, '$.kolicina', pp.kolicina) ELSE JSON_SET((json_hrana_i_oprema(pr.id)), '$.cena', pp.cena, '$.kolicina', pp.kolicina) END SEPARATOR ', '), ']') FROM proizvodi pr JOIN kategorije k ON pr.kategorija_id = k.id JOIN proizvodi_porudzbine pp ON pr.id = pp.proizvod_id WHERE pp.porudzbina_id = p.id), '$')) AS JSON  FROM porudzbine p WHERE id = porudzbina_id_in);
+END//
+
+CREATE TRIGGER proizvod_delete BEFORE DELETE ON proizvodi FOR EACH ROW
+BEGIN
+	DELETE FROM proizvodi_boje WHERE proizvod_id = OLD.id;
+	DELETE FROM proizvodi_slike WHERE proizvod_id = OLD.id;
+	DELETE FROM proizvodi_dodaci WHERE proizvod_id = OLD.id;
+	DELETE FROM proizvodi_porudzbine WHERE proizvod_id = OLD.id;
+END//
+
 DELIMITER ;
 
 CREATE VIEW hrana as (SELECT json_hrana_i_oprema(p.id) as json, p.id, p.naziv, p.kategorija_id, p.preporuceno FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE k.naziv = 'hrana' ORDER BY p.naziv);
 CREATE VIEW oprema as (SELECT json_hrana_i_oprema(p.id) as json, p.id, p.naziv, p.kategorija_id, p.preporuceno FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE k.naziv = 'oprema' ORDER BY p.naziv);
 CREATE VIEW zivotinje as (SELECT json_zivotinja(p.id) as json, p.id, p.naziv, p.kategorija_id, p.preporuceno FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE k.naziv = 'zivotinje' ORDER BY p.naziv);
 CREATE VIEW terarijumi as (SELECT json_terarijum(p.id) as json, p.id, p.naziv, p.kategorija_id, p.preporuceno FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE k.naziv = 'terarijumi' ORDER BY p.naziv);
+CREATE VIEW porudzbine_json as (SELECT json_porudzbina(p.id) as json, p.id, p.ime, p.adresa, p.mejl, p.telefon, p.datum, p.status_id, p.posiljka_id FROM porudzbine p ORDER BY p.datum DESC);

@@ -1,8 +1,21 @@
+INSERT INTO korisnici(mejl, ime, prezime, lozinka) VALUES
+('prodanovicandrija9@gmail.com', 'Andrija', 'Prodanović', '$2a$10$Lsz2b5JSSSnj8F0I/.bSwu0oO7tcQhsl/R/ck8j8GMst/qeW0G3e.'),
+('saraspasojevic7@gmail.com', 'Sara', 'Spasojević', '$2a$10$Lsz2b5JSSSnj8F0I/.bSwu0oO7tcQhsl/R/ck8j8GMst/qeW0G3e.'),
+('milojevicm374@gmail.com', 'Mihajlo', 'Milojević', '$2a$10$r/66qLFee9XIrpPthi8n3eIUUsvIXKsaSdBbSL9.ZWSVSo801jQyy');
+
+
 INSERT INTO kategorije(naziv) VALUES 
 ('terarijumi'), 	-- id: 1 --
 ('zivotinje'), 		-- id: 2 --
 ('hrana'), 			-- id: 3 --
 ('oprema'); 		-- id: 4 --
+
+INSERT INTO statusi(naziv) VALUES 
+('neobradjeno'), 	-- id: 1 --
+('obradjeno'), 		-- id: 2 --
+('poslato'), 		-- id: 3 --
+('primljeno'), 		-- id: 4 --
+('vraceno'); 		-- id: 5 --
 
 INSERT INTO doplate (naziv, cena) VALUES 
 ('boja', 1500),  	-- id: 1 --
@@ -21,28 +34,28 @@ INSERT INTO dodaci(naziv) VALUES
 ('Uvb senzor'); 						-- id: 5 --
 
 INSERT INTO slike(src, kategorija_id) VALUES
-('/terarijumi/TH1-1.jpeg', 1), 				-- id: 1 --
-('/terarijumi/TH1-2.jpeg', 1), 				-- id: 2 --
-('/terarijumi/TH1-3.jpeg', 1), 				-- id: 3 --
-('/terarijumi/TH1-4.jpeg', 1),				-- id: 4 --
-('/zivotinje/loptasti_piton_1.jpg', 2), 	-- id: 5 --
-('/zivotinje/leopard_gekon_1.jpg', 2), 		-- id: 6 --
-('/hrana/fobasi1.jpg', 3), 					-- id: 7 --
-('/hrana/fobasi2.jpg', 3), 					-- id: 8 --
-('/hrana/fobasi3.jpg', 3), 					-- id: 9 --
-('/hrana/dubije1.jpg', 3), 					-- id: 10 --
-('/hrana/dubije2.jpg', 3), 					-- id: 11 --
-('/hrana/dubije3.jpg', 3), 					-- id: 12 --
-('/oprema/uvbLampe1.jpg', 4),				-- id: 13 --
-('/oprema/uvbLampe2.jpg', 4), 				-- id: 14 --
-('/oprema/spotSIjaliceCrne1.jpg', 4), 		-- id: 15 --
-('/oprema/spotSIjaliceCrne2.jpg', 4), 		-- id: 16 --
-('/oprema/spotSIjaliceCrne3.jpg', 4), 		-- id: 17 --
-('/oprema/spotSIjaliceKlasik1.jpg', 4), 	-- id: 18 --
-('/oprema/spotSIjaliceKlasik2.jpg', 4), 	-- id: 19 --
-('/oprema/uvbSenzori1.jpg', 4), 			-- id: 20 --
-('/oprema/uvbSenzori2.jpg', 4), 			-- id: 21 --
-('/oprema/uvbSenzori3.jpg', 4); 			-- id: 22 --
+('/images/TH1-1.jpeg', 1), 					-- id: 1 --
+('/images/TH1-2.jpeg', 1), 					-- id: 2 --
+('/images/TH1-3.jpeg', 1), 					-- id: 3 --
+('/images/TH1-4.jpeg', 1),					-- id: 4 --
+('/images/loptasti_piton_1.jpg', 2), 		-- id: 5 --
+('/images/leopard_gekon_1.jpg', 2), 		-- id: 6 --
+('/images/fobasi1.jpg', 3), 				-- id: 7 --
+('/images/fobasi2.jpg', 3), 				-- id: 8 --
+('/images/fobasi3.jpg', 3), 				-- id: 9 --
+('/images/dubije1.jpg', 3), 				-- id: 10 --
+('/images/dubije2.jpg', 3), 				-- id: 11 --
+('/images/dubije3.jpg', 3), 				-- id: 12 --
+('/images/uvbLampe1.jpg', 4),				-- id: 13 --
+('/images/uvbLampe2.jpg', 4), 				-- id: 14 --
+('/images/spotSIjaliceCrne1.jpg', 4), 		-- id: 15 --
+('/images/spotSIjaliceCrne2.jpg', 4), 		-- id: 16 --
+('/images/spotSIjaliceCrne3.jpg', 4), 		-- id: 17 --
+('/images/spotSIjaliceKlasik1.jpg', 4), 	-- id: 18 --
+('/images/spotSIjaliceKlasik2.jpg', 4), 	-- id: 19 --
+('/images/uvbSenzori1.jpg', 4), 			-- id: 20 --
+('/images/uvbSenzori2.jpg', 4), 			-- id: 21 --
+('/images/uvbSenzori3.jpg', 4); 			-- id: 22 --
 
 -- TERARIJUMI --
 INSERT INTO proizvodi(id, naziv, cena, preporuceno, thumbnail, kategorija_id, opis, duzina, sirina, visina) VALUES
