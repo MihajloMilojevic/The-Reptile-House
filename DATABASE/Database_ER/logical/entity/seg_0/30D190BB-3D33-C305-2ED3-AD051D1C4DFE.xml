@@ -67,37 +67,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="proizvod_id1" id="DEC712B2-65A0-C840-B228-95E079643449">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:16:26 UTC</createdTime>
-<generatorID>AE4AAFFA-9CE0-568F-9946-FA85D856EFED</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>61B000E2-CA99-DD66-6233-4CC26F33AB94</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="slika_id" id="EC2F4B2E-C405-A1BE-2584-6D9BF6716876">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:16:26 UTC</createdTime>
-<generatorID>AE4AAFFA-9CE0-568F-9946-FA85D856EFED</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>14FB34B0-C692-28CD-152C-BA4879C7AD74</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -114,8 +84,6 @@
 <attributeRef>7B02124A-6B34-217B-D66B-55A86D8279AC</attributeRef>
 <attributeRef>BD4CE71D-6A9C-AB44-E79F-7BC6DC5E986E</attributeRef>
 <attributeRef>0C0BD28A-2897-E7E2-E77E-81801770691D</attributeRef>
-<attributeRef>DEC712B2-65A0-C840-B228-95E079643449</attributeRef>
-<attributeRef>EC2F4B2E-C405-A1BE-2584-6D9BF6716876</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

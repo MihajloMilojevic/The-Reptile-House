@@ -88,6 +88,45 @@
 <logicalDatatype>LOGDT040</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="status_id" id="8F1F21FD-7980-6CA9-F2C6-70903ECE2CFE">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:12:25 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="posiljka_id" id="4ECCB869-2C1B-9CC3-D2B8-784D7038E1E3">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:14:35 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="9BB79051-0D7A-8417-D36A-D723AF3A6743">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:12:06 UTC</createdTime>
+<generatorID>0A395F2D-E164-34D4-79FE-2E6623E63A2F</generatorID>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<referedAttribute>27499BB7-5ECD-5C39-5DE5-071694A0288C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="938A72F3-4860-D9F6-6C8D-B2FAF085C170" name="PORUDZBINA PK">

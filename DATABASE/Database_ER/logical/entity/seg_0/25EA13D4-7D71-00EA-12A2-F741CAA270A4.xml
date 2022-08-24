@@ -105,37 +105,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="proizvod_id1" id="5F679454-6363-5F83-38A3-E1AC63765F20">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:41:55 UTC</createdTime>
-<generatorID>05CDC34E-CF58-1AE2-41E0-8F2285B5D361</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>61B000E2-CA99-DD66-6233-4CC26F33AB94</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="slika_id" id="67EA71E3-69F6-0A9E-9C00-070817F5D4D4">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:41:55 UTC</createdTime>
-<generatorID>05CDC34E-CF58-1AE2-41E0-8F2285B5D361</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>14FB34B0-C692-28CD-152C-BA4879C7AD74</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id1" id="6A1711AE-06C1-0074-9D0F-1B4CE86C9D27">
 <createdBy>PC</createdBy>
@@ -150,7 +120,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -166,8 +136,6 @@
 <attributeRef>C013BD61-66FD-579B-C4EA-AABC499C454E</attributeRef>
 <attributeRef>2F3285E9-5797-B728-DA71-492408D0D07E</attributeRef>
 <attributeRef>AC12C741-942C-E676-130E-D9E402B76901</attributeRef>
-<attributeRef>5F679454-6363-5F83-38A3-E1AC63765F20</attributeRef>
-<attributeRef>67EA71E3-69F6-0A9E-9C00-070817F5D4D4</attributeRef>
 <attributeRef>6A1711AE-06C1-0074-9D0F-1B4CE86C9D27</attributeRef>
 </usedAttributes>
 </identifier>

@@ -78,18 +78,6 @@
 <dataTypeSize>10</dataTypeSize>
 <ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="detalji_id" id="D52BD615-A01F-2913-0BF1-4A1628BF5E00">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 16:04:39 UTC</createdTime>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="kategorija_id" id="1FCF1CCA-F005-08ED-329D-CACF4E6F8273">
 <createdBy>PC</createdBy>
 <createdTime>2022-08-16 16:05:13 UTC</createdTime>
@@ -245,36 +233,6 @@
 <logicalDatatype>LOGDT040</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="proizvod_id" id="61B000E2-CA99-DD66-6233-4CC26F33AB94">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:07:07 UTC</createdTime>
-<generatorID>1185D67D-BC75-32DC-F69F-8A3BB6CB8D22</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>3C5662A5-BD2E-82B3-C359-B67C8994DADF</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="slika_id" id="14FB34B0-C692-28CD-152C-BA4879C7AD74">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:07:07 UTC</createdTime>
-<generatorID>1185D67D-BC75-32DC-F69F-8A3BB6CB8D22</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>7852FD7A-23CC-4D14-2057-24038B69BAAD</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="id2" id="309788D4-4FD0-9869-9666-737FD1C1E48F">
 <createdBy>PC</createdBy>
 <createdTime>2022-08-16 21:10:28 UTC</createdTime>
@@ -301,8 +259,6 @@
 <pk>true</pk>
 <usedAttributes>
 <attributeRef>6A760327-0616-C49C-7DBE-C99E6BA9D9E8</attributeRef>
-<attributeRef>61B000E2-CA99-DD66-6233-4CC26F33AB94</attributeRef>
-<attributeRef>14FB34B0-C692-28CD-152C-BA4879C7AD74</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

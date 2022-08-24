@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="630BEBA9-F979-78CA-58FC-D5514A76615D" name="STATUS">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:11:02 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="27499BB7-5ECD-5C39-5DE5-071694A0288C">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:11:19 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="naziv" id="181DCDDE-F60A-DB5E-8DEA-412DD8438C70">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:11:30 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="69ADE9AD-DF4F-5FB9-96A8-8244B7FF2DDD" name="STATUS PK">
+<createdBy>PC</createdBy>
+<createdTime>2022-08-20 18:11:28 UTC</createdTime>
+<ownerDesignName>Database_ER</ownerDesignName>
+<engineerTo>
+<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>27499BB7-5ECD-5C39-5DE5-071694A0288C</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

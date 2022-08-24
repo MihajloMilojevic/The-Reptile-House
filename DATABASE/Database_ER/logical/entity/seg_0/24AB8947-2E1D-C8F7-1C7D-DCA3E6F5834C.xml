@@ -54,37 +54,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="proizvod_id1" id="D7132EE6-0BA4-A16B-AFAC-821011CEB839">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:08:48 UTC</createdTime>
-<generatorID>1185D67D-BC75-32DC-F69F-8A3BB6CB8D22</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>61B000E2-CA99-DD66-6233-4CC26F33AB94</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="slika_id1" id="87A89860-738D-A165-0B63-7FC2D463CFA0">
-<createdBy>PC</createdBy>
-<createdTime>2022-08-16 21:08:48 UTC</createdTime>
-<generatorID>1185D67D-BC75-32DC-F69F-8A3BB6CB8D22</generatorID>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<referedAttribute>14FB34B0-C692-28CD-152C-BA4879C7AD74</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id1" id="9FB03856-C289-334D-E7C2-E1A486FDCED9">
 <createdBy>PC</createdBy>
@@ -99,7 +69,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>10</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
@@ -115,8 +85,6 @@
 <attributeRef>3C5662A5-BD2E-82B3-C359-B67C8994DADF</attributeRef>
 <attributeRef>7852FD7A-23CC-4D14-2057-24038B69BAAD</attributeRef>
 <attributeRef>1C6E1A7B-B7FE-B250-D44F-0173B0DF0D38</attributeRef>
-<attributeRef>D7132EE6-0BA4-A16B-AFAC-821011CEB839</attributeRef>
-<attributeRef>87A89860-738D-A165-0B63-7FC2D463CFA0</attributeRef>
 <attributeRef>9FB03856-C289-334D-E7C2-E1A486FDCED9</attributeRef>
 </usedAttributes>
 </identifier>
