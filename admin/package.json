@@ -12,6 +12,7 @@
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/material": "^5.10.1",
+    "@mui/x-data-grid": "^5.15.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cookies-next": "^2.1.1",

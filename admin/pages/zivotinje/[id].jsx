@@ -49,7 +49,7 @@ function Zivotinja() {
 				vreme: formData.vreme.value,
 				roditelji: formData.roditelji.value,
 				tezina: formData.tezina.value,
-				ostecena: formData.ostecena.value,
+				ostecena: formData.ostecenja.value,
 			}
 			const res = await fetch(`/api/zivotinje/${data.id}`, {
 				method: "PATCH",
@@ -69,7 +69,7 @@ function Zivotinja() {
 				router.push("/zivotinje");
 			}, 1 * 1000);
 		} catch (error) {
-			console.trace(error);
+			console.error(error);
 			setTimeout(() => {
 				setLoader(false);
 				createNotification({

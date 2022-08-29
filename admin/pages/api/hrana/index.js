@@ -3,10 +3,16 @@ import errorWraper from "../../../middleware/errorWrapper";
 import Errors from "../../../errors";
 import { StatusCodes } from "http-status-codes";
 import { kreirajHranu, svaHrana } from "../../../database/controllers/hrana";
+import auth from "../../../middleware/authentication";
 
 const handler = nc({
 	onNoMatch: errorWraper((req, res) => {throw new Errors.NotFoundError(`${req.method} ${req.url} ne postoji`)})
 });
+
+handler.use(async (req, res, next) => {
+	await auth(req, res);
+	next()
+})
 
 handler.get(errorWraper(async (req, res) => {
 	const data = await svaHrana();

@@ -119,7 +119,7 @@ const fields = {
 		boje: true
 	},
 	"zivotinje": {
-		opis: true,
+		opis: false,
 		duzina: false,
 		sirina: false,
 		visina: false,
@@ -240,7 +240,7 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 			const body  = new FormData();
 			Array.from(files).forEach((file, index) => body.append("image"+index, file))
 			body.append("kategorija", kategorija);
-			const res = await fetch(`${IMAGE_HOST}/api/upload`, {
+			const res = await fetch(`${IMAGE_HOST}/api/images`, {
 				method: "POST",
 				body,
 			})
@@ -509,6 +509,7 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 		console.log(formData, hasError)
 		onSave?.(formData);
 	}
+	
 	return (
 		<div>
 			<form

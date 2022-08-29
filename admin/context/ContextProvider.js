@@ -53,7 +53,7 @@ export default function ContextProvider({children}) {
 	}
 
 	function openDeleteDialog({naziv, onYes}) {
-		setDeleteDialogOnYes(onYes);
+		setDeleteDialogOnYes(() => onYes);
 		setDeleteDialogNaziv(naziv);
 		setDeleteDialogOpen(true);
 	}

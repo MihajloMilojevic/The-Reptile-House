@@ -11,30 +11,70 @@ async function sveZivotinje() {
 }
 
 async function jednaZivotinja(id) {
-	let data = await mysql.query(`SELECT * FROM zivotinje WHERE id = '${id}'`)
+	let data = await mysql.query(`SELECT * FROM zivotinje WHERE id = ?`, [id])
 	await mysql.end();
 	if(data.length === 0) return null;
 	return JSON.parse(data[0].json);
 }
 
 async function obrisiZivotinju(id) {
-	const sql = `DELETE FROM proizvodi WHERE id = '${id}'`;
-	const data = await mysql.query(sql);
+	const sql = `DELETE FROM proizvodi WHERE id = ?`;
+	const data = await mysql.query(sql, [id]);
 	await mysql.end();
 	return data;
 }
 
 async function kreirajZivotinju({naziv, cena, preporuceno, slike, thumbnail, vrsta, morf, pol, vreme, roditelji, tezina, ostecenja}) {
 	const id = uid(20);
-	const sql = `INSERT INTO proizvodi(id, naziv, cena, preporuceno, thumbnail, kategorija_id, vrsta, morf, pol, vreme, roditelji, tezina, ostecenja) VALUES ('${id}','${naziv}','${cena}',${preporuceno ? "TRUE" : "FALSE"}, (SELECT id FROM slike WHERE src = '${thumbnail}'), (SELECT id FROM kategorije WHERE naziv = 'zivotinje'), '${vrsta}', '${morf}', '${pol}', '${vreme}', '${roditelji}', '${tezina}', '${ostecenja}'); ${spojiSlike(id, slike)}`;
-	const data = await mysql.query(sql);
+	const [slikeSql, slikeParams] = spojiSlike(id, slike);
+	const data = await mysql.query(
+		"INSERT INTO proizvodi(id, naziv, cena, preporuceno, thumbnail, kategorija_id, vrsta, morf, pol, vreme, roditelji, tezina, ostecenja) VALUES " + 
+		"(?,?,?,?, (SELECT id FROM slike WHERE src = ?), (SELECT id FROM kategorije WHERE naziv = 'zivotinje'), ?, ?, ?, ?, ?, ?, ?); " +
+		slikeSql,
+		[
+			id,
+			naziv,
+			cena,
+			Boolean(preporuceno),
+			thumbnail,
+			vrsta,
+			morf,
+			pol,
+			vreme,
+			roditelji,
+			tezina,
+			ostecenja,
+			...slikeParams
+		]
+	);
 	await mysql.end();
 	return data;
 }
 
 async function azurirajZivotinju({id, naziv, cena, preporuceno, slike, thumbnail, vrsta, morf, pol, vreme, roditelji, tezina, ostecenja}) {
-	const sql = `UPDATE proizvodi SET naziv = '${naziv}', cena = '${cena}', preporuceno = ${preporuceno ? "TRUE" : "FALSE"}, thumbnail = (SELECT id FROM slike WHERE src = '${thumbnail}'), vrsta = '${vrsta}', morf = '${morf}', pol = '${pol}', vreme = '${vreme}', roditelji = '${roditelji}', tezina = '${tezina}', ostecenja = '${ostecenja}' WHERE id = '${id}'; DELETE FROM proizvodi_slike WHERE proizvod_id = '${id}'; ${spojiSlike(id, slike)}`;
-	const data = await mysql.query(sql);
+	const [slikeSql, slikeParams] = spojiSlike(id, slike);
+	const data = await mysql.query(
+		"UPDATE proizvodi SET " + 
+		"naziv = ?, cena = ?, preporuceno = ?, thumbnail = (SELECT id FROM slike WHERE src = ?), vrsta = ?, morf = ?, pol = ?, vreme = ?, roditelji = ?, tezina = ?, ostecenja = ? WHERE id = ?; " + 
+		"DELETE FROM proizvodi_slike WHERE proizvod_id = ?; " +
+		slikeSql,
+		[
+			naziv,
+			cena,
+			Boolean(preporuceno),
+			thumbnail,
+			vrsta,
+			morf,
+			pol,
+			vreme,
+			roditelji,
+			tezina,
+			ostecenja,
+			id,
+			id,
+			...slikeParams
+		]
+	);
 	await mysql.end();
 	return data;
 }

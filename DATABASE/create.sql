@@ -162,6 +162,27 @@ BEGIN
 	DELETE FROM proizvodi_porudzbine WHERE proizvod_id = OLD.id;
 END//
 
+CREATE TRIGGER slike_before_delete BEFORE DELETE ON slike FOR EACH ROW
+BEGIN
+	if((SELECT 1 = ANY(SELECT COUNT(*) FROM proizvodi_slike ps WHERE ps.proizvod_id IN(SELECT DISTINCT ps.proizvod_id FROM proizvodi_slike ps WHERE ps.slika_id = OLD.id) GROUP BY ps.proizvod_id)) = 1 ) THEN
+    	SIGNAL SQLSTATE 'HY000' SET MESSAGE_TEXT = 'Ne možete obrisati ovu sliku jer bi proizvod ostao bez ijedne slike';
+	END IF;
+    IF((SELECT COUNT(*) FROM proizvodi p WHERE p.thumbnail = OLD.id) <> 0) THEN 
+    	SIGNAL SQLSTATE 'HY000' SET MESSAGE_TEXT = 'Ne možete obrisati ovu sliku jer je ona postavljena kao thumbnail proizvoda';
+    END IF;
+    DELETE FROM proizvodi_slike WHERE slika_id = OLD.id;
+END //
+
+CREATE TRIGGER boje_before_delete BEFORE DELETE ON boje FOR EACH ROW
+BEGIN
+    DELETE FROM proizvodi_boje WHERE boja_id = OLD.id;
+END //
+
+CREATE TRIGGER dodaci_before_delete BEFORE DELETE ON dodaci FOR EACH ROW
+BEGIN
+    DELETE FROM proizvodi_dodaci WHERE dodatak_id = OLD.id;
+END //
+
 DELIMITER ;
 
 CREATE VIEW hrana as (SELECT json_hrana_i_oprema(p.id) as json, p.id, p.naziv, p.kategorija_id, p.preporuceno FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE k.naziv = 'hrana' ORDER BY p.naziv);

@@ -6,7 +6,10 @@ DROP VIEW porudzbine_json;
 
 DROP PROCEDURE dodaj_proizvod_porudzbina;
 
-DROP TRIGGER proizvodi_porudzbine;
+DROP TRIGGER proizvod_delete;
+DROP TRIGGER slike_before_delete;
+DROP TRIGGER boje_before_delete;
+DROP TRIGGER dodaci_before_delete;
 
 DROP FUNCTION json_porudzbina;
 DROP FUNCTION json_terarijum;

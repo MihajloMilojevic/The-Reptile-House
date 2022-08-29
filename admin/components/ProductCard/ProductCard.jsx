@@ -91,7 +91,7 @@ function ProductCard(props) {
 								}} 
 								onClick={() => openDeleteDialog({
 									naziv: props.naziv, 
-									onYes: () => deleteProduct
+									onYes: deleteProduct
 								})}
 							>
 									<div>

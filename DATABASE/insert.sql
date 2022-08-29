@@ -15,7 +15,7 @@ INSERT INTO statusi(naziv) VALUES
 ('obradjeno'), 		-- id: 2 --
 ('poslato'), 		-- id: 3 --
 ('primljeno'), 		-- id: 4 --
-('vraceno'); 		-- id: 5 --
+('vraćeno'); 		-- id: 5 --
 
 INSERT INTO doplate (naziv, cena) VALUES 
 ('boja', 1500),  	-- id: 1 --

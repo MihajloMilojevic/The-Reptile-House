@@ -16,3 +16,4 @@ export {default as ProductCard} from "./ProductCard/ProductCard";
 export {default as ProductList} from "./ProductList/ProductList";
 export {default as DeleteDialog} from "./DeleteDialog/DeleteDialog";
 export {default as DragDropFile} from "./DragDropFile/DragDropFile";
+export {default as OnDoubleClickInput} from "./OnDoubleClickInput/OnDoubleClickInput";

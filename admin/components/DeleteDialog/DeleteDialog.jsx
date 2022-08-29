@@ -17,7 +17,7 @@ function DeleteDialog({naziv, onYes, open, setOpen}) {
 			open={open}
 			style={{zIndex: 9999999}}
 		>
-			<DialogTitle>{"Upozorenje!!!"}</DialogTitle>
+			<DialogTitle>{"Upozorenje!"}</DialogTitle>
 			<DialogContent>
 				<DialogContentText>
 					{`Da li ste sigurni da želite trajno da obrišete '${naziv}'?`}
@@ -25,7 +25,7 @@ function DeleteDialog({naziv, onYes, open, setOpen}) {
 			</DialogContent>
 			<DialogActions>
 				<GradientButton onClick={() => {setOpen(false)}} autoFocus style={{background: "white", color: "black"}} className="box-shadow">NE</GradientButton>
-				<GradientButton onClick={async () => { await onYes?.(); setOpen(false)}}>DA</GradientButton>
+				<GradientButton onClick={() => { onYes?.(); setOpen(false)}}>DA</GradientButton>
 			</DialogActions>
 		</Dialog>
 	)

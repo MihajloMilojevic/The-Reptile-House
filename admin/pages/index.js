@@ -8,28 +8,6 @@ export default function Home() {
 	const router = useRouter();
 	const {korisnik, setLoader, createNotification, notificationTypes} = useStateContext();
 
-	async function logout() {
-		try {
-			const res = await fetch("/api/logout");
-			const json = await res.json();
-			if(!json.ok) throw new Error(json.message);
-			createNotification({
-				type: notificationTypes.SUCCESS,
-				message: "Uspešno ste se odjavili",
-				title: "Usprešna odjava"
-			})
-			router.push("/login")
-		} catch (error) {
-			createNotification({
-				type: notificationTypes.ERROR,
-				message: error.message
-			})
-		}
-		finally {
-			setLoader(false)
-		}
-	}
-
 	return (
 		<div>
 			<Head>
@@ -40,25 +18,6 @@ export default function Home() {
 				/>
 			</Head>
 			<PageTitle>Admin Dashboard</PageTitle>
-			<p>Zdravo, {korisnik.ime} {korisnik.prezime}</p>
-			
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
-			<p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p><p>HELLLOO</p>
 		</div>
 	)
 }

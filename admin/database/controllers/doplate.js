@@ -1,6 +1,6 @@
 const mysql = require("..");
 
-async function doplate() {
+async function sveDoplate() {
 	const sql = "SELECT * FROM doplate"
 	let data = await mysql.query(sql)
 	await mysql.end();
@@ -11,5 +11,20 @@ async function doplate() {
 	return obj;
 }
 
-module.exports = doplate;
+async function promeniCenu(cena, naziv) {
+	const data = await mysql.query(
+		"UPDATE doplate SET cena = ? WHERE naziv = ?",
+		[
+			cena,
+			naziv
+		]
+	);
+	await mysql.end();
+	return data;
+}
+
+module.exports = {
+	sveDoplate,
+	promeniCenu
+};
 

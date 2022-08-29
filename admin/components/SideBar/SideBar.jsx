@@ -32,6 +32,10 @@ const links = [
 		text: "Porudžbine",
 		href: "/porudzbine"
 	},
+	{
+		text: "Ostalo",
+		href: "/ostalo"
+	},
 ]
 
 function SideBar() {

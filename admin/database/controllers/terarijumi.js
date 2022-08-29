@@ -11,15 +11,14 @@ async function sviTerarijumi() {
 }
 
 async function jedanTerarijum(id) {
-	let data = await mysql.query(`SELECT * FROM terarijumi WHERE id = '${id}'`)
+	let data = await mysql.query(`SELECT * FROM terarijumi WHERE id = ?`, [id])
 	await mysql.end();
 	if(data.length === 0) return null;
 	return JSON.parse(data[0].json);
 }
 
 async function obrisiTerarijum(id) {
-	const sql = `DELETE FROM proizvodi WHERE id = '${id}'`;
-	const data = await mysql.query(sql);
+	const data = await mysql.query("DELETE FROM proizvodi WHERE id = ?", [id]);
 	await mysql.end();
 	return data;
 }
@@ -32,38 +31,105 @@ async function getDodaciBoje() {
 }
 
 async function dodajBoju(hex) {
-	const sql = `INSERT INTO boje(hex) VALUES ('${hex}')`;
-	const data = await mysql.query(sql);
+	const data = await mysql.query("INSERT INTO boje(hex) VALUES (?)", [hex]);
 	await mysql.end();
-	return mysql.insertId;
+	return data.insertId;
 }
 
 async function dodajDodatak(naziv) {
-	const sql = `INSERT INTO dodaci(naziv) VALUES ('${naziv}')`;
-	const data = await mysql.query(sql);
+	const sql = ``;
+	const data = await mysql.query("INSERT INTO dodaci(naziv) VALUES (?)", [naziv]);
 	await mysql.end();
-	return mysql.insertId;
+	return data.insertId;
 }
 
+
 function spojiBoje(id_proizvoda, boje) {
-	return boje.map(({hex}) => `INSERT INTO proizvodi_boje(proizvod_id, boja_id) VALUES ('${id_proizvoda}', (SELECT id FROM boje WHERE hex = '${hex}'));`).join(" ");
+	const params = [];
+	let sql = "";
+	boje.forEach(({hex}) => {
+		sql += "INSERT INTO proizvodi_boje(proizvod_id, boja_id) VALUES (?, (SELECT id FROM boje WHERE hex = ?)); "
+		params.push(id_proizvoda);
+		params.push(hex);
+	})
+	return [sql, params];
 }
 
 function spojiDodatke(id_proizvoda, dodaci) {
-	return dodaci.map((dodatak) => `INSERT INTO proizvodi_dodaci(proizvod_id, dodatak_id) VALUES ('${id_proizvoda}', (SELECT id FROM dodaci WHERE naziv = '${dodatak}'));`).join(" ");
+	const params = [];
+	let sql = "";
+	dodaci.forEach(dodatak => {
+		sql += "INSERT INTO proizvodi_dodaci(proizvod_id, dodatak_id) VALUES (?, (SELECT id FROM dodaci WHERE naziv = ?)); "
+		params.push(id_proizvoda);
+		params.push(dodatak);
+	})
+	return [sql, params];
 }
 
 async function kreirajTerarijum({naziv, cena, preporuceno, opis, slike, thumbnail, duzina, sirina, visina, boje, dodaci}) {
 	const id = uid(20);
-	const sql = `INSERT INTO proizvodi(id, naziv, cena, preporuceno, opis, thumbnail, kategorija_id, duzina, sirina, visina) VALUES ('${id}','${naziv}','${cena}',${preporuceno ? "TRUE" : "FALSE"},'${opis}',(SELECT id FROM slike WHERE src = '${thumbnail}'), (SELECT id FROM kategorije WHERE naziv = 'terarijumi'), '${duzina}', '${sirina}', '${visina}'); ${spojiSlike(id, slike)} ${spojiBoje(id, boje)} ${spojiDodatke(id, dodaci)}`;
-	const data = await mysql.query(sql);
+	const [slikeSql, slikeParams] = spojiSlike(id, slike);
+	const [bojeSql, bojeParams] = spojiBoje(id, boje);
+	const [dodaciSql, dodaciParams] = spojiDodatke(id, dodaci)
+
+	const data = await mysql.query(
+		"INSERT INTO proizvodi(id, naziv, cena, preporuceno, opis, thumbnail, kategorija_id, duzina, sirina, visina) VALUES " + 
+		"( ?, ?, ?, ?, ?,(SELECT id FROM slike WHERE src =  ?), (SELECT id FROM kategorije WHERE naziv = 'terarijumi'), ?,  ?, ?); " +
+		slikeSql +
+		bojeSql + 
+		dodaciSql,
+		[
+			id,
+			naziv,
+			cena,
+			Boolean(preporuceno),
+			opis,
+			thumbnail, 
+			duzina,
+			sirina,
+			visina,
+			...slikeParams,
+			...bojeParams,
+			...dodaciParams
+		]
+	);
 	await mysql.end();
 	return data;
 }
 
 async function azurirajTerarijum({id, naziv, cena, preporuceno, opis, slike, thumbnail, duzina, sirina, visina, boje, dodaci}) {
-	const sql = `UPDATE proizvodi SET naziv = '${naziv}', cena = '${cena}', preporuceno = ${preporuceno ? "TRUE" : "FALSE"}, opis = '${opis}', thumbnail = (SELECT id FROM slike WHERE src = '${thumbnail}'), duzina = '${duzina}', sirina = '${sirina}', visina = '${visina}' WHERE id = '${id}'; DELETE FROM proizvodi_slike WHERE proizvod_id = '${id}'; DELETE FROM proizvodi_boje WHERE proizvod_id = '${id}'; DELETE FROM proizvodi_dodaci WHERE proizvod_id = '${id}'; ${spojiSlike(id, slike)} ${spojiBoje(id, boje)} ${spojiDodatke(id, dodaci)}`;
-	const data = await mysql.query(sql);
+	const [slikeSql, slikeParams] = spojiSlike(id, slike);
+	const [bojeSql, bojeParams] = spojiBoje(id, boje);
+	const [dodaciSql, dodaciParams] = spojiDodatke(id, dodaci);
+
+	const sql = `${spojiSlike(id, slike)} ${spojiBoje(id, boje)} ${spojiDodatke(id, dodaci)}`;
+	const data = await mysql.query(
+		"UPDATE proizvodi SET " + 
+		"naziv = ?, cena = ?, preporuceno = ?, opis = ?, thumbnail = (SELECT id FROM slike WHERE src = ?), duzina = ?, sirina = ?, visina = ? WHERE id = ?; " + 
+		"DELETE FROM proizvodi_slike WHERE proizvod_id = ?; " + 
+		"DELETE FROM proizvodi_boje WHERE proizvod_id = ?; " +
+		"DELETE FROM proizvodi_dodaci WHERE proizvod_id = ?; " +
+		slikeSql + 
+		bojeSql +
+		dodaciSql,
+		[
+			naziv,
+			cena,
+			Boolean(preporuceno),
+			opis,
+			thumbnail,
+			duzina,
+			sirina,
+			visina,
+			id,
+			id,
+			id,
+			id,
+			...slikeParams,
+			...bojeParams,
+			...dodaciParams
+		]
+	);
 	await mysql.end();
 	return data;
 }
