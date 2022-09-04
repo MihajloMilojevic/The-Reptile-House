@@ -22,12 +22,12 @@ async function obrisiOpremu(id) {
 	return data;
 }
 
-async function kreirajOpremu({naziv, cena, preporuceno, opis, slike, thumbnail}) {
+async function kreirajOpremu({naziv, cena, preporuceno, opis, slike, thumbnail, duzina, sirina, visina}) {
 	const id = uid(20);
 	const [slikeSql, slikeParams] = spojiSlike(id, slike);
 	const data = await mysql.query(
-		"INSERT INTO proizvodi(id, naziv, cena, preporuceno, opis, thumbnail, kategorija_id) VALUES " +
-		"( ?, ?, ?, ?, ?, (SELECT id FROM slike WHERE src = ?), (SELECT id FROM kategorije WHERE naziv = 'oprema')); " + 
+		"INSERT INTO proizvodi(id, naziv, cena, preporuceno, opis, thumbnail, kategorija_id, duzina, sirina, visina) VALUES " +
+		"( ?, ?, ?, ?, ?, (SELECT id FROM slike WHERE src = ?), (SELECT id FROM kategorije WHERE naziv = 'oprema'), ?, ?, ?); " + 
 		slikeSql,
 		[
 			id,
@@ -36,6 +36,9 @@ async function kreirajOpremu({naziv, cena, preporuceno, opis, slike, thumbnail})
 			Boolean(preporuceno),
 			opis,
 			thumbnail,
+			duzina,
+			sirina,
+			visina,
 			...slikeParams
 		]
 	);
@@ -43,11 +46,11 @@ async function kreirajOpremu({naziv, cena, preporuceno, opis, slike, thumbnail})
 	return data;
 }
 
-async function azurirajOpremu({id, naziv, cena, preporuceno, opis, slike, thumbnail}) {
+async function azurirajOpremu({id, naziv, cena, preporuceno, opis, slike, thumbnail, duzina, sirina, visina}) {
 	const [slikeSql, slikeParams] = spojiSlike(id, slike);
 	const data = await mysql.query(
 		"UPDATE proizvodi SET " +
-		"naziv = ?, cena = ?, preporuceno = ?, opis = ?, thumbnail = (SELECT id FROM slike WHERE src = ?) WHERE id = ?; " +
+		"naziv = ?, cena = ?, preporuceno = ?, opis = ?, thumbnail = (SELECT id FROM slike WHERE src = ?), duzina = ?, sirina = ?, visina = ? WHERE id = ?; " +
 		"DELETE FROM proizvodi_slike WHERE proizvod_id = ?; " +
 		slikeSql,
 		[
@@ -56,6 +59,9 @@ async function azurirajOpremu({id, naziv, cena, preporuceno, opis, slike, thumbn
 			Boolean(preporuceno),
 			opis,
 			thumbnail,
+			duzina,
+			sirina,
+			visina,
 			id,
 			id,
 			...slikeParams

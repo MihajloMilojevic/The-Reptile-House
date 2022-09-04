@@ -43,7 +43,6 @@ function Porudzbine() {
 
 	const columnSettings = {
 		hideable: false,
-		sortable: false,
 		disableColumnMenu: true,
 		minWidth: 200,
 		maxWidth: 1000

@@ -8,6 +8,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Head from 'next/head'
 import doplate from "../../database/doplate";
 import { jedanTerarijum, sviTerarijumi } from "../../database/terarijumi";
+import { useRouter } from "next/router";
 
 function Dimenzije({duzina, sirina, visina}) {
 
@@ -52,6 +53,7 @@ function Dimenzije({duzina, sirina, visina}) {
 
 function Dodaci({dodaci}) {
 	
+	const router = useRouter();
 	const {windowSize} = useStateContext();
 
 	return (
@@ -76,10 +78,14 @@ function Dodaci({dodaci}) {
 								justifyContent: "flex-start",
 								alignItems: "center",
 								gap: "1rem",
+								...(item.proizvod_url ? {cursor: "pointer"} : {})
+							}}
+							onClick={() => {
+								if(item.proizvod_url) window.open(item.proizvod_url);
 							}}
 						>
 							<Kvadrat />
-							<span>{item}</span>
+							<span>{item.naziv}</span>
 						</div>
 					))
 				}

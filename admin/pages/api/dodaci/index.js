@@ -2,7 +2,7 @@ import nc from "next-connect";
 import errorWraper from "../../../middleware/errorWrapper";
 import Errors from "../../../errors";
 import { StatusCodes } from "http-status-codes";
-import { obrisiDodatak, promeniDodatak, sviDodaci } from "../../../database/controllers/dodaci";
+import { obrisiDodatak, promeniDodatak, sviDodaci, dodajDodatak } from "../../../database/controllers/dodaci";
 import auth from "../../../middleware/authentication";
 
 const handler = nc({
@@ -17,6 +17,12 @@ handler.use(async (req, res, next) => {
 handler.get(errorWraper(async (req, res) => {
 	const data = await sviDodaci();
 	res.status(StatusCodes.OK).json({ok: true, data});
+}))
+
+handler.post(errorWraper(async (req, res) => {
+	const id = await dodajDodatak(req.body.naziv, req.body.proizvodId);
+	console.log(id)
+	res.status(StatusCodes.OK).json({ok: true, id: id});
 }))
 
 handler.patch(errorWraper(async (req, res) => {

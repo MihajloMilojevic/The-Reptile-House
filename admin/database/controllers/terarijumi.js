@@ -24,10 +24,18 @@ async function obrisiTerarijum(id) {
 }
 
 async function getDodaciBoje() {
-	const sql = `SELECT JSON_OBJECT( 'dodaci', JSON_EXTRACT((SELECT CONCAT('[', GROUP_CONCAT(CONCAT('"', d.naziv, '"') SEPARATOR ','),']') FROM dodaci d), '$'), 'boje', JSON_EXTRACT(( SELECT CONCAT( '[', GROUP_CONCAT( JSON_OBJECT('hex', b.hex) SEPARATOR ', ' ), ']' ) FROM boje b), '$' ) ) as json`;
+	const sql = `SELECT JSON_OBJECT( 'dodaci', JSON_EXTRACT((SELECT CONCAT('[', GROUP_CONCAT(json_dodatak(d.id) SEPARATOR ','),']') FROM dodaci d), '$'), 'boje', JSON_EXTRACT(( SELECT CONCAT( '[', GROUP_CONCAT( JSON_OBJECT('hex', b.hex) SEPARATOR ', ' ), ']' ) FROM boje b), '$' ) ) as json`;
 	const data = await mysql.query(sql);
 	await mysql.end();
 	return JSON.parse(data[0].json);
+}
+
+async function getProizvode() {
+	const sql = "SELECT id, naziv FROM proizvodi ORDER BY kategorija_id DESC";
+	const data = await mysql.query(sql);
+	console.log(data);
+	await mysql.end();
+	return data;
 }
 
 async function dodajBoju(hex) {
@@ -35,14 +43,6 @@ async function dodajBoju(hex) {
 	await mysql.end();
 	return data.insertId;
 }
-
-async function dodajDodatak(naziv) {
-	const sql = ``;
-	const data = await mysql.query("INSERT INTO dodaci(naziv) VALUES (?)", [naziv]);
-	await mysql.end();
-	return data.insertId;
-}
-
 
 function spojiBoje(id_proizvoda, boje) {
 	const params = [];
@@ -139,8 +139,8 @@ module.exports = {
 	jedanTerarijum,
 	obrisiTerarijum,
 	getDodaciBoje,
+	getProizvode,
 	dodajBoju,
-	dodajDodatak,
 	kreirajTerarijum,
 	azurirajTerarijum,
 }

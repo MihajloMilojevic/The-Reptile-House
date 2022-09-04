@@ -44,6 +44,9 @@ function Oprema() {
 				thumbnail: formData.thumbnail.value,
 				slike: formData.slike.value.map(slika => slika.id),
 				opis: formData.opis.value,
+				duzina: formData.duzina.value && formData.duzina.value > 0 ? formData.duzina.value : null,
+				sirina: formData.sirina.value && formData.sirina.value > 0 ? formData.sirina.value : null,
+				visina: formData.visina.value && formData.visina.value > 0 ? formData.visina.value : null
 			}
 			const res = await fetch(`/api/oprema/${data.id}`, {
 				method: "PATCH",

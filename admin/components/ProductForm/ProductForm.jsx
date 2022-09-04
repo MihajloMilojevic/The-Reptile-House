@@ -14,7 +14,10 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Menu from '@mui/material/Menu';
+import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Box from '@mui/material/Box';
@@ -150,9 +153,9 @@ const fields = {
 	},
 	"oprema": {
 		opis: true,
-		duzina: false,
-		sirina: false,
-		visina: false,
+		duzina: true,
+		sirina: true,
+		visina: true,
 		vrsta: false,
 		morf: false,
 		pol: false,
@@ -175,6 +178,7 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 	const [slike, setSlike] = useStateWithCallback([]);
 	const [dodaci, setDodaci] = useStateWithCallback([]);
 	const [boje, setBoje] = useStateWithCallback([]);
+	const [proizvodi, setProizvodi] = useStateWithCallback([]);
 	const [formData, setFormData] = useState(getFormData(proizvod))
 
 	const fetchSlike = useCallback(async (cb, errcb) => {
@@ -222,14 +226,38 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 		}
 	}, [])
 
+	const fetchProizvode = useCallback(async (cb, errcb) => {
+		try {
+			setLoader(true);
+			const res = await fetch(`/api/terarijumi/proizvodi`);
+			const json = await res.json();
+			if(!json.ok) throw new Error(json.message);
+			setProizvodi(json.data, cb);
+			setTimeout(() => {
+				setLoader(false);
+			}, 1 * 1000);
+		} catch (error) {
+			setTimeout(() => {
+				setLoader(false);
+				createNotification({
+					type: notificationTypes.ERROR,
+					message: error.message
+				})
+				errcb?.();
+			}, 1 * 1000);
+		}
+	}, [])
+
 	useEffect(() => {
 		setFormData(getFormData(proizvod));
 	}, [proizvod])
 
 	useEffect(() => {
 		fetchSlike(null, () => router.push(`/${kategorija}`));
-		if(kategorija === "terarijumi")
-			fetchDodaciBoje(null, () => router.push("/terarijumi")); 	
+		if(kategorija === "terarijumi") {
+			fetchDodaciBoje(null, () => router.push("/terarijumi"));
+			fetchProizvode(null, () => router.push("/terarijumi"));
+		} 	
 	}, [])
 
 	async function uploadFiles(files) {
@@ -302,23 +330,23 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 		} 
 	}
 
-	async function dodajDodatak(naziv) {
+	async function dodajDodatak(naziv, proizvodId) {
 		try {
 			if(!naziv)
 				return;
 			setLoader(true);
-			const res = await fetch(`/api/terarijumi/dodaci`, {
+			const res = await fetch(`/api/dodaci`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json"
 				},
-				body: JSON.stringify({naziv}),
+				body: JSON.stringify({naziv, proizvodId}),
 			})
 			const json = await res.json();
 			if(!json.ok) throw new Error(json.message);
 			fetchDodaciBoje((_, dodaci) => {
-				if(typeof dodaci[0] !== "string") return;
-				setFormData({...formData, dodaci: {value: [...formData.dodaci.value, naziv], error: ""}})
+				if(!dodaci[0]?.hasOwnProperty("proizvod_url")) return;
+				setFormData({...formData, dodaci: {value: [...formData.dodaci.value, dodaci.find(el => el.naziv = naziv)], error: ""}})
 			});
 		}
 		catch(error) {
@@ -379,36 +407,6 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 			}
 			else {
 				formDataCopy.opis.error = ""
-			}
-		}
-
-		if(prikaz.duzina) {
-			if(!formDataCopy.duzina.value) {
-				formDataCopy.duzina.error = "Morate uneti dužinu."
-				hasError = true;
-			}
-			else {
-				formDataCopy.duzina.error = ""
-			}
-		}
-
-		if(prikaz.visina) {
-			if(!formDataCopy.visina.value) {
-				formDataCopy.visina.error = "Morate uneti visinu."
-				hasError = true;
-			}
-			else {
-				formDataCopy.visina.error = ""
-			}
-		}
-
-		if(prikaz.sirina) {
-			if(!formDataCopy.sirina.value) {
-				formDataCopy.sirina.error = "Morate uneti širinu."
-				hasError = true;
-			}
-			else {
-				formDataCopy.sirina.error = ""
 			}
 		}
 
@@ -932,8 +930,8 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 								<DodajDodatke
 									dodajNov={dodajDodatak} 
 									odaberiPostojeci={(dodaci) => setFormData({...formData, dodaci: {error: "", value: [...formData.dodaci.value, ...dodaci]}})} 
-									dodaci={dodaci.filter(dodatak => formData.dodaci.value.findIndex(item => item === dodatak) < 0)}
-									// dodaci={dodaci}
+									dodaci={dodaci.filter(dodatak => formData.dodaci.value.findIndex(item => item.naziv === dodatak.naziv) < 0)}
+									proizvodi={proizvodi}
 								/>
 							</label>
 							{
@@ -974,7 +972,14 @@ export default function ProductForm({kategorija, proizvod, onSave}) {
 													}}
 												>
 													<Kvadrat />
-													{dodatak}
+													<span 
+														style={dodatak.proizvod_url ? {cursor: "pointer"} : {}}
+														onClick={() => {
+															if(dodatak.proizvod_url) window.open(`${IMAGE_HOST}${dodatak.proizvod_url}`);
+														}}
+													>
+														{dodatak.naziv}
+													</span>
 													<GradientButton
 														type="button"
 														style={{
@@ -1303,7 +1308,7 @@ function OdabirPostojecegDodatka({dodaci, odaberiPostojeci}) {
 													color="secondary"
 												/>
 											}
-											label={dodatak}
+											label={dodatak.naziv}
 											labelPlacement="end"
 										/>
 									</div>
@@ -1482,9 +1487,11 @@ function DodavanjeNoveBoje({dodajNovu}) {
 	)
 }
 
-function DodavanjeNovogDodatka({dodajNov}) {
-	const {setModalOpen} = useStateContext();
+function DodavanjeNovogDodatka({dodajNov, proizvodi}) {
+	const {setModalOpen, windowSize} = useStateContext();
 	const [text, setText] = useState("");
+	const [proizvodId, setProizvodId] = useState(null);
+
 	return (
 		<div 
 			style={{
@@ -1507,6 +1514,7 @@ function DodavanjeNovogDodatka({dodajNov}) {
 					flexDirection: "column",
 					justifyContent: "center",
 					alignItems: "center",
+					gap: "2rem"
 				}}
 			>
 				<div className={styles.form_column}>
@@ -1514,6 +1522,37 @@ function DodavanjeNovogDodatka({dodajNov}) {
 						<label htmlFor="dodatak">Dodatak *</label>
 					</div>
 					<textarea id="dodatak" type="text" className={styles.form_textarea} name="dodatak"  value={text} onChange={e => setText(e.target.value)} />
+				</div>
+				<div className={styles.form_column}>
+					<div className={styles.form_label}>
+						<label htmlFor="dodatak">Proizvod *</label>
+					</div>
+					<Select
+						value={proizvodId}
+						onChange={e => setProizvodId(e.target.value)}
+						sx={{ width: "100%", backgroundColor: "white", borderRadius: "7.5px" }}
+						MenuProps={{
+							style: {zIndex: 999999999}
+						}}
+					>
+						<MenuItem 
+							style={{zIndex: 99999999}} 
+							value={null}
+						>
+							Bez proizvoda
+						</MenuItem>
+						{
+							proizvodi.map(proizvod => (
+								<MenuItem 
+									style={{zIndex: 99999999}} 
+									key={proizvod.id} 
+									value={proizvod.id}
+								>
+									{proizvod.naziv}
+								</MenuItem>
+							))
+						}
+					</Select>
 				</div>
 			</div>
 			<div
@@ -1526,7 +1565,7 @@ function DodavanjeNovogDodatka({dodajNov}) {
 			>
 				<GradientButton 
 					onClick={() => {
-						dodajNov(text);
+						dodajNov(text, proizvodId);
 						setModalOpen(false)
 					}}
 				>
@@ -1658,7 +1697,7 @@ function DodajBoje({dodajNovu, odaberiPostojecu, boje}) {
 	)
 }
 
-function DodajDodatke({dodajNov, odaberiPostojeci, dodaci}) {
+function DodajDodatke({dodajNov, odaberiPostojeci, dodaci, proizvodi}) {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const {setModalOpen, setModalChildren} = useStateContext();
 	const open = Boolean(anchorEl);
@@ -1670,7 +1709,7 @@ function DodajDodatke({dodajNov, odaberiPostojeci, dodaci}) {
 	};
 	
 	function onDodajNov() {
-		setModalChildren(<DodavanjeNovogDodatka dodajNov={dodajNov}/>)
+		setModalChildren(<DodavanjeNovogDodatka proizvodi={proizvodi} dodajNov={dodajNov}/>)
 		setModalOpen(true)
 		handleClose();
 	}

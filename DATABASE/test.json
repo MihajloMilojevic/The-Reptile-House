@@ -1,42 +1,72 @@
 {
-  "doplate": {
-    "boja": { "id": 1, "cena": 1500 },
-    "naziv": { "id": 2, "cena": 2000 }
+  "props": {
+    "pageProps": {
+      "id": "yful6xljeav",
+      "boje": [
+        { "hex": "#000000" },
+        { "hex": "#9c9a9a" },
+        { "hex": "#ffffff" }
+      ],
+      "cena": 27000,
+      "opis": "Terarijumi THR- T1, predvidjeni su za cuvanje vecih gustera (bradate agame) i zmija srednje velicine (loptasti pitoni, smukovi...).",
+      "naziv": "THR - T1 (800x400x400)",
+      "slike": [
+        {
+          "id": 25,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/8d106fdb51fa030b178c.jpg"
+        },
+        {
+          "id": 26,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/d106fdb51fa030b178ce.jpg"
+        },
+        {
+          "id": 27,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/106fdb51fa030b178ce9.jpg"
+        },
+        {
+          "id": 28,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/06fdb51fa030b178ce92.jpg"
+        },
+        {
+          "id": 39,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/39a9cd1c40e43d95f4f6.jpg"
+        },
+        {
+          "id": 40,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/9a9cd1c40e43d95f4f63.jpg"
+        },
+        {
+          "id": 41,
+          "alt": "THR - T1 (800x400x400)",
+          "src": "/images/a9cd1c40e43d95f4f633.jpg"
+        }
+      ],
+      "dodaci": [
+        "Uvb fluorescentna lampa 10%",
+        "Spot sijalica 25W",
+        "Wi-Fi (tuch) prekidac",
+        "HD kamera za pracenje zivotinja",
+        "Uvb senzor"
+      ],
+      "dimenzije": { "duzina": 800, "sirina": 400, "visina": 400 },
+      "thumbnail": "/images/c8d106fdb51fa030b178.jpg",
+      "kategorija": "terarijumi",
+      "preporuceno": 1,
+      "doplate": { "boja": 1500, "natpis": 2000 }
+    },
+    "__N_SSG": true
   },
-  "slike": [
-    { "id": 1, "src": "/images/TH1-1.jpeg" },
-    { "id": 2, "src": "/images/TH1-2.jpeg" },
-    { "id": 3, "src": "/images/TH1-3.jpeg" },
-    { "id": 4, "src": "/images/TH1-4.jpeg" },
-    { "id": 5, "src": "/images/loptasti_piton_1.jpg" },
-    { "id": 6, "src": "/images/leopard_gekon_1.jpg" },
-    { "id": 7, "src": "/images/fobasi1.jpg" },
-    { "id": 8, "src": "/images/fobasi2.jpg" },
-    { "id": 9, "src": "/images/fobasi3.jpg" },
-    { "id": 10, "src": "/images/dubije1.jpg" },
-    { "id": 11, "src": "/images/dubije2.jpg" },
-    { "id": 12, "src": "/images/dubije3.jpg" },
-    { "id": 13, "src": "/images/uvbLampe1.jpg" },
-    { "id": 14, "src": "/images/uvbLampe2.jpg" },
-    { "id": 15, "src": "/images/spotSIjaliceCrne1.jpg" },
-    { "id": 16, "src": "/images/spotSIjaliceCrne2.jpg" },
-    { "id": 17, "src": "/images/spotSIjaliceCrne3.jpg" },
-    { "id": 18, "src": "/images/spotSIjaliceKlasik1.jpg" },
-    { "id": 19, "src": "/images/spotSIjaliceKlasik2.jpg" },
-    { "id": 20, "src": "/images/uvbSenzori1.jpg" },
-    { "id": 21, "src": "/images/uvbSenzori2.jpg" },
-    { "id": 22, "src": "/images/uvbSenzori3.jpg" }
-  ],
-  "boje": [
-    { "id": 1, "hex": "#000000" },
-    { "id": 2, "hex": "#9c9a9a" },
-    { "id": 3, "hex": "#ffffff" }
-  ],
-  "dodaci": [
-    { "id": 1, "naziv": "Uvb fluorescentna lampa 10%" },
-    { "id": 2, "naziv": "Spot sijalica 25W" },
-    { "id": 3, "naziv": "Wi-Fi (tuch) prekidac" },
-    { "id": 4, "naziv": "HD kamera za pracenje zivotinja" },
-    { "id": 5, "naziv": "Uvb senzor" }
-  ]
+  "page": "/terarijumi/[id]",
+  "query": { "id": "yful6xljeav" },
+  "buildId": "ChC_6ZSFPbFsbe1U4cHu9",
+  "isFallback": false,
+  "gsp": true,
+  "customServer": true,
+  "scriptLoader": []
 }

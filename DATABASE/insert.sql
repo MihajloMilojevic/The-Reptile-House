@@ -26,13 +26,6 @@ INSERT INTO boje(hex) VALUES
 ('#9c9a9a'), -- id: 2 --
 ('#ffffff'); -- id: 3 --
 
-INSERT INTO dodaci(naziv) VALUES 
-('Uvb fluorescentna lampa 10%'),  		-- id: 1 --
-('Spot sijalica 25W'),					-- id: 2 --
-('Wi-Fi (tuch) prekidac'), 				-- id: 3 --
-('HD kamera za pracenje zivotinja'), 	-- id: 4 --
-('Uvb senzor'); 						-- id: 5 --
-
 INSERT INTO slike(src, kategorija_id) VALUES
 ('/images/TH1-1.jpeg', 1), 					-- id: 1 --
 ('/images/TH1-2.jpeg', 1), 					-- id: 2 --
@@ -85,6 +78,13 @@ INSERT INTO proizvodi(id, naziv, cena, preporuceno, thumbnail, kategorija_id, op
 ('fjxol6xma0j6', 'Spot sijalica klasik (25W)', 600, FALSE, 18, 4, 'U ponudi E27 crne kao i klasicne spot sijalice (3% uvb)'),
 ('idxhl6xma14q', 'Spot sijalica klasik (50W)', 700, TRUE, 18, 4, 'U ponudi E27 crne kao i klasicne spot sijalice (3% uvb)'),
 ('9j1kl6xma1vc', 'UVB senzori', 950, TRUE, 20, 4, 'U ponudi Uvb senzori kojima mozete proveriti efektivnost Vase lampe.');
+
+INSERT INTO dodaci(naziv, proizvod_id) VALUES 
+('Uvb fluorescentna lampa 10%', '2j1el6xm9yen'),  		-- id: 1 --
+('Spot sijalica 25W', 'fjxol6xma0j6'),					-- id: 2 --
+('Wi-Fi (tuch) prekidac', NULL), 						-- id: 3 --
+('HD kamera za pracenje zivotinja', NULL), 				-- id: 4 --
+('Uvb senzor', '9j1kl6xma1vc'); 						-- id: 5 --
 
 INSERT INTO proizvodi_slike(proizvod_id, slika_id) VALUES
 ('yful6xljeav', 1),
