@@ -132,7 +132,7 @@ END//
 
 CREATE FUNCTION json_dodatak(dodatak_id_in VARCHAR(20)) RETURNS JSON
 BEGIN
-	RETURN (SELECT JSON_OBJECT('naziv', d.naziv, 'proizvod_url', (SELECT CONCAT('/', k.naziv, '/', p.id) FROM proizvodi p JOIN kategorije k ON p.kategorija_id = k.id WHERE p.id = d.proizvod_id)) FROM dodaci d WHERE d.id = dodatak_id_in);
+	RETURN JSON_EXTRACT((SELECT CONCAT('[', GROUP_CONCAT(json_dodatak(pd.dodatak_id)), ']') FROM proizvodi_dodaci pd WHERE pd.proizvod_id = proizvod_id_in), '$');
 END//
 
 CREATE FUNCTION json_dodaci(proizvod_id_in VARCHAR(20)) RETURNS JSON

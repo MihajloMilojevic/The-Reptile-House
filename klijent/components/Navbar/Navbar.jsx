@@ -73,8 +73,20 @@ function Navbar() {
 					</div>
 				</Link>
 			</div>
-			<div className={styles.navbar_menu} onClick={() => setActiveMenu(prevActiveMenu => !prevActiveMenu)}>
-				{ activeMenu ? <AiOutlineClose /> : <AiOutlineMenu />}
+			<div className={styles.navbar_menu}>
+				{
+					!activeMenu && (
+						<Link href="/korpa">
+							<div className={styles.navbar__links_korpa} style={{cursor: "pointer"}}>
+								<BiBasket color="black" size={25}/>
+								<span className={`gradient ${styles.navbar__links_korpa_broj}`}>{korpa.length}</span>
+							</div>
+						</Link>
+					)
+				}
+				<div onClick={() => setActiveMenu(prevActiveMenu => !prevActiveMenu)}>
+					{ activeMenu ? <AiOutlineClose /> : <AiOutlineMenu />}
+				</div>
 			</div>
 		</nav>
 	)

@@ -11,6 +11,7 @@ DROP TRIGGER slike_before_delete;
 DROP TRIGGER boje_before_delete;
 DROP TRIGGER dodaci_before_delete;
 
+DROP FUNCTION json_dodatak;
 DROP FUNCTION json_porudzbina;
 DROP FUNCTION json_terarijum;
 DROP FUNCTION json_zivotinja;

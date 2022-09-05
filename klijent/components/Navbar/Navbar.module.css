@@ -55,7 +55,10 @@
 		padding: 1rem 1.5rem;
 	}
 	.navbar_menu {
-		display: block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
 		z-index: 99999;
 	}
 	.navbar__links {

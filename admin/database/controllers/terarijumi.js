@@ -61,7 +61,7 @@ function spojiDodatke(id_proizvoda, dodaci) {
 	dodaci.forEach(dodatak => {
 		sql += "INSERT INTO proizvodi_dodaci(proizvod_id, dodatak_id) VALUES (?, (SELECT id FROM dodaci WHERE naziv = ?)); "
 		params.push(id_proizvoda);
-		params.push(dodatak);
+		params.push(dodatak.naziv);
 	})
 	return [sql, params];
 }
@@ -101,8 +101,7 @@ async function azurirajTerarijum({id, naziv, cena, preporuceno, opis, slike, thu
 	const [slikeSql, slikeParams] = spojiSlike(id, slike);
 	const [bojeSql, bojeParams] = spojiBoje(id, boje);
 	const [dodaciSql, dodaciParams] = spojiDodatke(id, dodaci);
-
-	const sql = `${spojiSlike(id, slike)} ${spojiBoje(id, boje)} ${spojiDodatke(id, dodaci)}`;
+	
 	const data = await mysql.query(
 		"UPDATE proizvodi SET " + 
 		"naziv = ?, cena = ?, preporuceno = ?, opis = ?, thumbnail = (SELECT id FROM slike WHERE src = ?), duzina = ?, sirina = ?, visina = ? WHERE id = ?; " + 
