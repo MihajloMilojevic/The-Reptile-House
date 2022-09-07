@@ -20,7 +20,7 @@ const initialFormData = {
 function Login() {
 
 	const router = useRouter();
-	const {setKorisnik, createNotification, notificationTypes, setLoader} = useStateContext()
+	const {setKorisnik, createNotification, notificationTypes, setLoader, originalRoute} = useStateContext()
 
 	const [formData, setFormData] = useState(initialFormData)
 
@@ -81,7 +81,8 @@ function Login() {
 					message: `Uspešno ste se prijavili kao ${json.korisnik.ime} ${json.korisnik.prezime}`,
 					title: "Usprešna prijava"
 				})
-				router.push("/");
+				console.log(originalRoute)
+				router.push(originalRoute || "/");
 			}, 1 * 1000);
 		} catch (error) {
 			setTimeout(() => {

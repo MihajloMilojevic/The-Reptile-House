@@ -1,17 +1,17 @@
 const mysql = require("..");
 
 async function svePorudzbine() {
-	let data = await mysql.query(`SELECT * FROM porudzbine_json`)
+	let data = await mysql.query(`SELECT *, ( SELECT naziv FROM statusi s WHERE s.id = p.status_id ) AS status, ( SELECT SUM(pp.kolicina * pp.cena) FROM proizvodi_porudzbine pp WHERE pp.porudzbina_id = p.id ) as cena FROM porudzbine p ORDER BY p.datum DESC;`)
 	await mysql.end();
-	data = data.map(item => JSON.parse(item.json))
 	return data
 }
 
 async function jednaPorudzbina(id) {
-	let data = await mysql.query(`SELECT * FROM porudzbine_json WHERE id = ?`, [id])
+	let data = await mysql.query(`SELECT *, ( SELECT naziv FROM statusi s WHERE s.id = p.status_id ) AS status, ( SELECT SUM(pp.kolicina * pp.cena) FROM proizvodi_porudzbine pp WHERE pp.porudzbina_id = p.id ) as cena FROM porudzbine p WHERE p.id = ?`, [id])
 	await mysql.end();
-	if(data.length === 0) return null;
-	return JSON.parse(data[0].json);
+	let proizvodi = await mysql.query(`SELECT json FROM porudzbine_proizvodi WHERE porudzbina_id = ?`, [id]);
+	await mysql.end();
+	return {...data[0], proizvodi: proizvodi.map(el => JSON.parse(el.json))};
 }
 
 async function promeniStatus(id, status) {

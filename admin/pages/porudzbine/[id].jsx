@@ -234,7 +234,7 @@ function Porudzbina() {
 							<Kvadrat />
 							<span>Id pošiljke: </span>
 						</div>
-						<OnDoubleClickInput style={{...(windowSize.width <= 600 ? {marginInline: "2rem"} : {}), flex: 1, width: "100%"}} value={data?.posiljka_id ?? "/"} onConfirm={promeniIdPosiljke} />
+						<OnDoubleClickInput style={{...(windowSize.width <= 600 ? {marginInline: "2rem"} : {}), flex: 1, width: "100%"}} value={data?.posiljka_id || "/"} onConfirm={promeniIdPosiljke} />
 					</div>
 				</div>
 			)}

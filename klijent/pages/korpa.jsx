@@ -260,6 +260,7 @@ function Korpa() {
 				body: JSON.stringify({
 					proizvodi: korpa.map(item => ({
 						proizvod_id: item.id,
+						naziv: item.naziv,
 						kolicina: item.kolicina,
 						boja: item?.boja?.hex ?? "",
 						natpis: item?.natpis ?? ""

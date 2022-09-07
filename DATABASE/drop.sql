@@ -2,7 +2,7 @@ DROP VIEW hrana;
 DROP VIEW oprema;
 DROP VIEW zivotinje;
 DROP VIEW terarijumi;
-DROP VIEW porudzbine_json;
+DROP VIEW porudzbine_proizvodi;
 
 DROP PROCEDURE dodaj_proizvod_porudzbina;
 

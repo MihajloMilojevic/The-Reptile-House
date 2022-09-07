@@ -10,6 +10,7 @@ const StateContext = createContext();
 export default function ContextProvider({children}) {
 	const router = useRouter();
 	const windowSize = useWindowSize();
+	const [originalRoute, setOriginalRoute] = useState("/");
 	const [activeMenu, setActiveMenu] = useState(true);
 	const [loader, setLoader] = useState(false);
 	const [loading, setLoading] = useState(true);
@@ -26,6 +27,7 @@ export default function ContextProvider({children}) {
 	}, [windowSize])
 
 	useEffect(() => {
+		setOriginalRoute(window?.location?.pathname);
 		(async () => {
 			try {
 				const res = await fetch("/api/showme");
@@ -90,15 +92,11 @@ export default function ContextProvider({children}) {
 				break;
 		}
 	}
-	let render = loading ? 
-					<Loader show={true} /> : 
-					<>
-						{children}
-						<Loader show={loader} />
-					</>;
+
 	return (
 		<StateContext.Provider
 			value={{
+				originalRoute,
 				windowSize,
 				activeMenu, setActiveMenu,
 				notificationTypes, createNotification,
@@ -109,7 +107,14 @@ export default function ContextProvider({children}) {
 				setModalChildren, setModalOpen,
 			}}
 		>	
-			{render}
+			{
+				!korisnik && loading ? (
+					<Loader show={true} />
+				) : (
+					children
+				)
+			}
+			<Loader show={loader} />
 			<NotificationContainer/>
 			<DeleteDialog 
 				open={deleteDialogOpen}

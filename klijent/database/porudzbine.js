@@ -16,10 +16,6 @@ function dodajSveProizvode(proizvodi, id_porudzbine) {
 		sqlAll += sql;
 		paramsAll = [...paramsAll, ...params];
 	});
-	console.log({
-		sqlAll,
-		paramsAll
-	})
 	return [sqlAll, paramsAll];
 }
 
@@ -41,8 +37,19 @@ async function poruci({ime, prezime, mejl, adresa, telefon, proizvodi}) {
 		]
 	);
 	await mysql.end();
-	return data;
+	return id;
 }
 
-module.exports = poruci;
+async function jednaPorudzbina(id) {
+	let data = await mysql.query(`SELECT *, ( SELECT naziv FROM statusi s WHERE s.id = p.status_id ) AS status, ( SELECT SUM(pp.kolicina * pp.cena) FROM proizvodi_porudzbine pp WHERE pp.porudzbina_id = p.id ) as cena FROM porudzbine p WHERE p.id = ?`, [id])
+	await mysql.end();
+	let proizvodi = await mysql.query(`SELECT json FROM porudzbine_proizvodi WHERE porudzbina_id = ?`, [id]);
+	await mysql.end();
+	return {...data[0], proizvodi: proizvodi.map(el => JSON.parse(el.json))};
+}
+
+module.exports = {
+	poruci,
+	jednaPorudzbina
+};
 
