@@ -98,7 +98,48 @@ CREATE TABLE proizvodi_porudzbine (
 	PRIMARY KEY(proizvod_id, porudzbina_id, boja, natpis)
 );
 
+CREATE TABLE stranice(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	url TEXT NOT NULL
+);
+
+CREATE TABLE datumi(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	datum DATE NOT NULL
+);
+
+CREATE TABLE posete(
+	stranica_id INT REFERENCES stranice(id),
+	datum_id INT REFERENCES datumi(id),
+	broj_poseta BIGINT NOT NULL DEFAULT 0,
+	PRIMARY KEY(stranica_id, datum_id)
+);
+
 DELIMITER //
+
+CREATE PROCEDURE dodaj_posetu(url_in TEXT, dan INT, mesec INT, godina INT) 
+BEGIN
+	DECLARE datumV DATE;
+
+	SET datumV = STR_TO_DATE((CONCAT(dan, '.', mesec, '.', godina)), '%d.%m.%Y');
+	
+    IF((SELECT COUNT(*) FROM stranice WHERE url = url_in) = 0) THEN 
+    	INSERT INTO stranice(url) VALUES(url_in);
+    END IF;
+    
+    IF((SELECT COUNT(*) FROM datumi WHERE datum = datumV) = 0) THEN
+    	INSERT INTO datumi(datum) VALUES(datumV);
+    END IF;
+    
+    IF((SELECT COUNT(*) FROM posete WHERE stranica_id = (SELECT id FROM stranice WHERE url = url_in) AND datum_id = (SELECT id FROM datumi WHERE datum = datumV)) = 0) THEN
+    	INSERT INTO posete(stranica_id, datum_id) VALUES((SELECT id FROM stranice WHERE url = url_in), (SELECT id FROM datumi WHERE datum = datumV));
+    END IF;
+    
+    UPDATE posete
+    SET broj_poseta = broj_poseta + 1
+    WHERE stranica_id = (SELECT id FROM stranice WHERE url = url_in) AND datum_id = (SELECT id FROM datumi WHERE datum = datumV);
+    
+END//
 
 CREATE PROCEDURE dodaj_proizvod_porudzbina(proizvod_id_in VARCHAR(20), porudzbina_id_in VARCHAR(20), kolicina_in INT, boja_in TEXT, natpis_in TEXT)
 BEGIN

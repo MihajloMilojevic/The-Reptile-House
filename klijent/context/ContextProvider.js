@@ -2,11 +2,13 @@ import {createContext, useContext, useState, useEffect} from "react";
 import useWindowSize from "../utils/hooks/useWindowSize";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { Loader } from "../components";
+import { useRouter } from "next/router";
 
 const StateContext = createContext();
 
 
 export default function ContextProvider({children}) {
+	const router = useRouter();
 	const windowSize = useWindowSize();
 	const [activeMenu, setActiveMenu] = useState(false);
 	const [korpa, setKorpa] = useState([]);
@@ -38,7 +40,23 @@ export default function ContextProvider({children}) {
 		catch {
 			isprazniKorpu()
 		}
-	}, [korpa])			
+	}, [korpa])
+	
+	useEffect(() => {
+		(async () => {
+			try {
+				await fetch("/api/visit", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({url: window?.location?.pathname || router.pathname})
+				})
+			} catch (error) {
+				console.error(error);
+			}
+		})()
+	}, [router.pathname])
 
 	function promeniKorpu(newKorpa) {
 		localStorage.setItem("korpa", JSON.stringify(newKorpa))

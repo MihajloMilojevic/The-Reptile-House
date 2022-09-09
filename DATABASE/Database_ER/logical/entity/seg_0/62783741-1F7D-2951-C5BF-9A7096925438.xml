@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DC6F0EED-580B-A4D0-E915-72E05BB5A2A4" name="DODATAK">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="62783741-1F7D-2951-C5BF-9A7096925438" name="STRANICE">
 <createdBy>PC</createdBy>
-<createdTime>2022-08-16 15:51:31 UTC</createdTime>
+<createdTime>2022-09-09 19:37:27 UTC</createdTime>
 <ownerDesignName>Database_ER</ownerDesignName>
 <engineerTo>
 <item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id" id="22A8758E-F201-8775-4C34-131ED4159505">
+<Attribute name="id" id="96049F0E-7879-6E09-56D7-D22F7C7C8998">
 <createdBy>PC</createdBy>
-<createdTime>2022-08-16 15:51:37 UTC</createdTime>
+<createdTime>2022-09-09 19:37:39 UTC</createdTime>
 <ownerDesignName>Database_ER</ownerDesignName>
 <engineerTo>
 <item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
@@ -27,45 +27,30 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="naziv" id="3E09ABC7-DA96-F371-5DE6-1D38F36099E4">
+<Attribute name="url" id="9D76C5B9-5933-87BF-B55A-1CDF4462235E">
 <createdBy>PC</createdBy>
-<createdTime>2022-08-16 15:52:00 UTC</createdTime>
+<createdTime>2022-09-09 19:37:51 UTC</createdTime>
 <ownerDesignName>Database_ER</ownerDesignName>
 <engineerTo>
 <item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>50</dataTypeSize>
-<ownDataTypeParameters>50,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="proizvod_id" id="1372141B-B1C3-ED68-5EFB-330DEDF8AA01">
-<createdBy>PC</createdBy>
-<createdTime>2022-09-09 19:36:45 UTC</createdTime>
-<ownerDesignName>Database_ER</ownerDesignName>
-<engineerTo>
-<item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
-</engineerTo>
-<nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>20</dataTypeSize>
-<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT040</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="23564DDF-732F-207C-7892-69A36AC1B7FD" name="DODATAK PK">
+<identifier id="152CC2B2-6577-2FCA-F057-3AA29B5494E3" name="STRANICE PK">
 <createdBy>PC</createdBy>
-<createdTime>2022-08-16 15:51:56 UTC</createdTime>
+<createdTime>2022-09-09 19:37:50 UTC</createdTime>
 <ownerDesignName>Database_ER</ownerDesignName>
 <engineerTo>
 <item key="D8389023-0339-F7EF-63BE-EFF3AD76EC9C" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>22A8758E-F201-8775-4C34-131ED4159505</attributeRef>
+<attributeRef>96049F0E-7879-6E09-56D7-D22F7C7C8998</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

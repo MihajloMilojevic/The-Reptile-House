@@ -5,6 +5,7 @@ DROP VIEW terarijumi;
 DROP VIEW porudzbine_proizvodi;
 
 DROP PROCEDURE dodaj_proizvod_porudzbina;
+DROP PROCEDURE dodaj_posetu;
 
 DROP TRIGGER proizvod_delete;
 DROP TRIGGER slike_before_delete;
@@ -21,6 +22,9 @@ DROP FUNCTION json_boje;
 DROP FUNCTION json_dodaci;
 DROP FUNCTION json_slike;
 
+DROP TABLE posete;
+DROP TABLE stranice;
+DROP TABLE datumi;
 DROP TABLE proizvodi_porudzbine;
 DROP TABLE proizvodi_dodaci;
 DROP TABLE proizvodi_boje;
